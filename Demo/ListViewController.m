@@ -4,53 +4,73 @@
 
 @implementation ListViewController
 
-- (void)dealloc {
-    
+- (void)dealloc
+{
+	NSLog(@"dealloc %@", self);
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
 	[super viewDidLoad];
+	NSLog(@"%@ viewDidLoad", self.title);
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
 	[super viewWillAppear:animated];
+	NSLog(@"%@ viewWillAppear", self.title);
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated
+{
 	[super viewDidAppear:animated];
+	NSLog(@"%@ viewDidAppear", self.title);
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated
+{
 	[super viewWillDisappear:animated];
+	NSLog(@"%@ viewWillDisappear", self.title);
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
+- (void)viewDidDisappear:(BOOL)animated
+{
 	[super viewDidDisappear:animated];
+	NSLog(@"%@ viewDidDisappear", self.title);
 }
 
-- (void)willMoveToParentViewController:(UIViewController *)parent {
+- (void)willMoveToParentViewController:(UIViewController *)parent
+{
 	[super willMoveToParentViewController:parent];
+	NSLog(@"%@ willMoveToParentViewController %@", self.title, parent);
 }
 
-- (void)didMoveToParentViewController:(UIViewController *)parent {
+- (void)didMoveToParentViewController:(UIViewController *)parent
+{
 	[super didMoveToParentViewController:parent];
+	NSLog(@"%@ didMoveToParentViewController %@", self.title, parent);
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
 	return YES;
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
 	[super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+	NSLog(@"%@ willRotateToInterfaceOrientation", self.title);
 }
 
 #pragma mark - UITableViewDataSource
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
 	return 50;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
 	static NSString *CellIdentifier = @"Cell";
 
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -64,7 +84,9 @@
 
 #pragma mark - UITableViewDelegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	NSLog(@"%@, parent is %@", self.title, self.parentViewController);
 
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 
@@ -85,7 +107,8 @@
 	[self presentViewController:navController animated:YES completion:nil];
 }
 
-- (IBAction)done:(id)sender {
+- (IBAction)done:(id)sender
+{
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
