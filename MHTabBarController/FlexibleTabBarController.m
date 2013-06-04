@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2012 Matthijs Hollemans
+ * Copyright (c) Amy Nugent
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,11 +20,11 @@
  * THE SOFTWARE.
  */
 
-#import "MHTabBarController.h"
+#import "FlexibleTabBarController.h"
 
 static const NSInteger TagOffset = 1000;
 
-@implementation MHTabBarController
+@implementation FlexibleTabBarController
 {
 	UIView *tabButtonsContainerView;
 	UIView *contentContainerView;
@@ -48,7 +48,7 @@ static const NSInteger TagOffset = 1000;
 	contentContainerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	[self.view addSubview:contentContainerView];
 
-	indicatorImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MHTabBarIndicator"]];
+	indicatorImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"FlexibleTabBarIndicator"]];
 	[self.view addSubview:indicatorImageView];
 
 	[self reloadTabButtons];
@@ -164,7 +164,7 @@ static const NSInteger TagOffset = 1000;
 
 - (void)setViewControllers:(NSArray *)newViewControllers
 {
-	NSAssert([newViewControllers count] >= 2, @"MHTabBarController requires at least two view controllers");
+	NSAssert([newViewControllers count] >= 2, @"FlexibleTabBarController requires at least two view controllers");
 
 	UIViewController *oldSelectedViewController = self.selectedViewController;
 
@@ -334,7 +334,7 @@ static const NSInteger TagOffset = 1000;
 {
 	[button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
 
-	UIImage *image = [[UIImage imageNamed:@"MHTabBarActiveTab"] stretchableImageWithLeftCapWidth:0 topCapHeight:0];
+	UIImage *image = [[UIImage imageNamed:@"FlexibleTabBarActiveTab"] stretchableImageWithLeftCapWidth:0 topCapHeight:0];
 	[button setBackgroundImage:image forState:UIControlStateNormal];
 	[button setBackgroundImage:image forState:UIControlStateHighlighted];
 	
@@ -346,7 +346,7 @@ static const NSInteger TagOffset = 1000;
 {
 	[button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 
-	UIImage *image = [[UIImage imageNamed:@"MHTabBarInactiveTab"] stretchableImageWithLeftCapWidth:1 topCapHeight:0];
+	UIImage *image = [[UIImage imageNamed:@"FlexibleTabBarInactiveTab"] stretchableImageWithLeftCapWidth:1 topCapHeight:0];
 	[button setBackgroundImage:image forState:UIControlStateNormal];
 	[button setBackgroundImage:image forState:UIControlStateHighlighted];
 

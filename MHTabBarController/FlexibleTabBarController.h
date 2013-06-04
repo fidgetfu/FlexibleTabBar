@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2012 Matthijs Hollemans
+ * Copyright (c) Amy Nugent
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,18 +20,18 @@
  * THE SOFTWARE.
  */
 
-@protocol MHTabBarControllerDelegate;
+@protocol FlexibleTabBarControllerDelegate;
 
 /*
  * A custom tab bar container view controller. It works just like a regular
  * UITabBarController, except the tabs are at the top and look different.
  */
-@interface MHTabBarController : UIViewController
+@interface FlexibleTabBarController : UIViewController
 
 @property (nonatomic, copy) NSArray *viewControllers;
 @property (nonatomic, weak) UIViewController *selectedViewController;
 @property (nonatomic, assign) NSUInteger selectedIndex;
-@property (nonatomic, weak) id <MHTabBarControllerDelegate> delegate;
+@property (nonatomic, weak) id <FlexibleTabBarControllerDelegate> delegate;
 
 - (void)setSelectedIndex:(NSUInteger)index animated:(BOOL)animated;
 - (void)setSelectedViewController:(UIViewController *)viewController animated:(BOOL)animated;
@@ -39,10 +39,10 @@
 @end
 
 /*
- * The delegate protocol for MHTabBarController.
+ * The delegate protocol for FlexibleTabBarController.
  */
-@protocol MHTabBarControllerDelegate <NSObject>
+@protocol FlexibleTabBarControllerDelegate <NSObject>
 @optional
-- (BOOL)mh_tabBarController:(MHTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index;
-- (void)mh_tabBarController:(MHTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index;
+- (BOOL)mh_tabBarController:(FlexibleTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index;
+- (void)mh_tabBarController:(FlexibleTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index;
 @end
