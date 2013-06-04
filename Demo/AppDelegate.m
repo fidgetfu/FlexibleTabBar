@@ -19,17 +19,17 @@
     ListViewController *ListViewController4 = [[ListViewController alloc] initWithStyle:UITableViewStylePlain];
     ListViewController *ListViewController5 = [[ListViewController alloc] initWithStyle:UITableViewStylePlain];
 	
-	CDListViewController1.title = @"Tab 1";
+	CDListViewController1.title = @"r";
     CDListViewController1.managedObjectContext = self.managedObjectContext;
-	CDListViewController2.title = @"Tab 2";
+	CDListViewController2.title = @"c";
 	CDListViewController2.managedObjectContext = self.managedObjectContext;
-    ListViewController3.title = @"Tab 3";
-    ListViewController4.title = @"Tab 4";
-    ListViewController5.title = @"Tab 5";
+    ListViewController3.title = @"1";
+    ListViewController4.title = @"s";
+    ListViewController5.title = @"7";
 
-	CDListViewController2.tabBarItem.image = [UIImage imageNamed:@"Taijitu"];
-	CDListViewController2.tabBarItem.imageInsets = UIEdgeInsetsMake(0.0f, -4.0f, 0.0f, 0.0f);
-	CDListViewController2.tabBarItem.titlePositionAdjustment = UIOffsetMake(4.0f, 0.0f);
+//	CDListViewController2.tabBarItem.image = [UIImage imageNamed:@"Taijitu"];
+//	CDListViewController2.tabBarItem.imageInsets = UIEdgeInsetsMake(0.0f, -4.0f, 0.0f, 0.0f);
+//	CDListViewController2.tabBarItem.titlePositionAdjustment = UIOffsetMake(4.0f, 0.0f);
 
 	NSArray *viewControllers = @[CDListViewController1, CDListViewController2, ListViewController3, ListViewController4, ListViewController5];
 	FlexibleTabBarController *tabBarController = [[FlexibleTabBarController alloc] init];

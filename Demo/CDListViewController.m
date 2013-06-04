@@ -218,6 +218,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.textLabel.text = [NSString stringWithFormat:@"%@ - Row %d @ %@", self.title,
                            indexPath.row, [[object valueForKey:@"timeStamp"] description]];
+    cell.textLabel.font = [UIFont fontWithName:@"Open Sans" size:18];
 }
 
 

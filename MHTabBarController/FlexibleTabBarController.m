@@ -95,7 +95,7 @@ static const NSInteger TagOffset = 1000;
 	{
 		UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
 		button.tag = TagOffset + index;
-		button.titleLabel.font = [UIFont boldSystemFontOfSize:18];
+		button.titleLabel.font = [UIFont fontWithName:@"fontello" size:36];
 		button.titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
 
 		UIOffset offset = viewController.tabBarItem.titlePositionAdjustment;
@@ -336,7 +336,7 @@ static const NSInteger TagOffset = 1000;
 }
 
 - (CGFloat)tabBarHeight {
-	return 44.0f;
+	return 54.0f;
 }
 
 @end
