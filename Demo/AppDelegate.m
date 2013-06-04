@@ -15,20 +15,23 @@
     
 	CDListViewController *CDListViewController1 = [[CDListViewController alloc] initWithStyle:UITableViewStylePlain];
 	CDListViewController *CDListViewController2 = [[CDListViewController alloc] initWithStyle:UITableViewStylePlain];
-	CDListViewController *CDListViewController3 = [[CDListViewController alloc] initWithStyle:UITableViewStylePlain];
+	ListViewController *ListViewController3 = [[ListViewController alloc] initWithStyle:UITableViewStylePlain];
+    ListViewController *ListViewController4 = [[ListViewController alloc] initWithStyle:UITableViewStylePlain];
+    ListViewController *ListViewController5 = [[ListViewController alloc] initWithStyle:UITableViewStylePlain];
 	
 	CDListViewController1.title = @"Tab 1";
     CDListViewController1.managedObjectContext = self.managedObjectContext;
 	CDListViewController2.title = @"Tab 2";
 	CDListViewController2.managedObjectContext = self.managedObjectContext;
-    CDListViewController3.title = @"Tab 3";
-    CDListViewController3.managedObjectContext = self.managedObjectContext;
+    ListViewController3.title = @"Tab 3";
+    ListViewController4.title = @"Tab 4";
+    ListViewController5.title = @"Tab 5";
 
 	CDListViewController2.tabBarItem.image = [UIImage imageNamed:@"Taijitu"];
 	CDListViewController2.tabBarItem.imageInsets = UIEdgeInsetsMake(0.0f, -4.0f, 0.0f, 0.0f);
 	CDListViewController2.tabBarItem.titlePositionAdjustment = UIOffsetMake(4.0f, 0.0f);
 
-	NSArray *viewControllers = @[CDListViewController1, CDListViewController2, CDListViewController3];
+	NSArray *viewControllers = @[CDListViewController1, CDListViewController2, ListViewController3, ListViewController4, ListViewController5];
 	FlexibleTabBarController *tabBarController = [[FlexibleTabBarController alloc] init];
 
 	tabBarController.delegate = self;
@@ -36,7 +39,6 @@
 
 	// Uncomment this to select "Tab 2".
 	//tabBarController.selectedIndex = 1;
-
 	// Uncomment this to select "Tab 3".
 	//tabBarController.selectedViewController = CDListViewController3;
 
@@ -46,14 +48,14 @@
 	return YES;
 }
 
-- (BOOL)mh_tabBarController:(FlexibleTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index {
+- (BOOL)flex_tabBarController:(FlexibleTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index {
 	
 	// Uncomment this to prevent "Tab 3" from being selected.
 	//return (index != 2);
 	return YES;
 }
 
-- (void)mh_tabBarController:(FlexibleTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index {
+- (void)flex_tabBarController:(FlexibleTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index {
 	
 }
 

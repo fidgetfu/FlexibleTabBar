@@ -43,6 +43,6 @@
  */
 @protocol FlexibleTabBarControllerDelegate <NSObject>
 @optional
-- (BOOL)mh_tabBarController:(FlexibleTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index;
-- (void)mh_tabBarController:(FlexibleTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index;
+- (BOOL)flex_tabBarController:(FlexibleTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index;
+- (void)flex_tabBarController:(FlexibleTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index;
 @end

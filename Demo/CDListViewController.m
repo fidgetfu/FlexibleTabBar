@@ -1,5 +1,6 @@
 
 #import "CDListViewController.h"
+#import "ListViewController.h"
 #import "FlexibleTabBarController.h"
 
 @implementation CDListViewController
@@ -71,16 +72,14 @@
 
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-	CDListViewController *CDlistViewController1 = [[CDListViewController alloc] initWithStyle:UITableViewStylePlain];
-	CDListViewController *CDlistViewController2 = [[CDListViewController alloc] initWithStyle:UITableViewStylePlain];
+	ListViewController *listViewController1 = [[ListViewController alloc] initWithStyle:UITableViewStylePlain];
+	ListViewController *listViewController2 = [[ListViewController alloc] initWithStyle:UITableViewStylePlain];
 	
-	CDlistViewController1.title = @"Another Tab 1";
-    CDlistViewController1.managedObjectContext = self.managedObjectContext;
-	CDlistViewController2.title = @"Another Tab 2";
-    CDlistViewController1.managedObjectContext = self.managedObjectContext;
+	listViewController1.title = @"Another Tab 1";
+	listViewController2.title = @"Another Tab 2";
     
 	FlexibleTabBarController *tabBarController = [[FlexibleTabBarController alloc] init];
-	tabBarController.viewControllers = @[CDlistViewController1, CDlistViewController2];
+	tabBarController.viewControllers = @[listViewController1, listViewController2];
 	tabBarController.title = @"Modal Screen";
 	tabBarController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] 
 		initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
