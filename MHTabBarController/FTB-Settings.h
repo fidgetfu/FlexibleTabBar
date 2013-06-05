@@ -9,15 +9,14 @@
 #ifndef FlexibleTabBar_FTB_Settings_h
 #define FlexibleTabBar_FTB_Settings_h
 
-// SOME SETTINGS
 #define IS_IPHONE (!IS_IPAD)
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPhone)
 
-// set the names for the tabs here. That way you can name the view and the tab separately. I find you frequently want a shorter tab name than view name. This is especially true if you're using an Icon font like fontAwesome to display icons in the title.
-#define     tabNameFromIndex(a) [[NSArray arrayWithObjects:@"r",@"c",@"l",@"s",@"g",nil] objectAtIndex:a];
+// SOME SETTINGS
 
 #define     FTB_SIZE            56.0f
-#define     FTB_ORIENTATION     @"bottom"
+#define     FTB_ORIENT_IPHONE   @"bottom"
+#define     FTB_ORIENT_IPAD     @"left"
 #define     FTB_ANIMATED        YES
 
 #define     BUTTON_BG           [UIColor colorWithRed:0.69 green:0.75 blue:0.76 alpha:1.0]
@@ -27,10 +26,13 @@
 #define     BUTTON_FONT_SIZE    36.0f
 
 // SOME LOGIC
+// my way of getting the right rotation is somewhat kludge-y. there must be a better way to do this.
+#define     isTop(a)            [a isEqualToString:@"top"]
+#define     isLeft(a)           [a isEqualToString:@"left"]
+#define     isRight(a)          [a isEqualToString:@"right"]
+#define     isBottom(a)         [a isEqualToString:@"bottom"]
 
-#define     ftbIsTop            [FTB_ORIENTATION isEqualToString:@"top"]
-#define     ftbIsLeft           [FTB_ORIENTATION isEqualToString:@"left"]
-#define     ftbIsRight          [FTB_ORIENTATION isEqualToString:@"right"]
-#define     ftbIsBottom         [FTB_ORIENTATION isEqualToString:@"bottom"]
+// set the names for the tabs here. That way you can name the view and the tab separately. I find you frequently want a shorter tab name than view name. This is especially true if you're using an Icon font like fontAwesome to display icons in the title.
+#define     tabNameFromIndex(a) [[NSArray arrayWithObjects:@"r",@"c",@"l",@"s",@"g",nil] objectAtIndex:a];
 
 #endif
