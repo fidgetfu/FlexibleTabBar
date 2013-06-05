@@ -10,4 +10,4 @@ Features:
 - choice of where to put the tab bar, what size to make it (top, bottom ,left, right)
 - demo shows the tab bar in use with core data and uinavigationcontroller
 
-![Screenshot](https://github.com/hollance/MHTabBarController/raw/master/Screenshot.png)
+![Screenshot](https://github.com/fidgetfu/FlexibleTabBarController/raw/master/Screenshot.png)
