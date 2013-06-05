@@ -13,10 +13,21 @@
 -(void)customiseAppearance {
     // CUSTOMISE NAV BARS
     [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    [[UINavigationBar appearance] setBackgroundColor:BUTTON_BG];
+    [[UINavigationBar appearance] setBackgroundColor:BUTTON_HIGHLIGHT];
     [[UIToolbar appearance] setBackgroundImage:[UIImage alloc] forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
-    [[UIToolbar appearance] setBackgroundColor:BUTTON_BG];
-
+    [[UIToolbar appearance] setBackgroundColor:BUTTON_HIGHLIGHT];
+    [[UINavigationBar appearance] setTitleTextAttributes:
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      BUTTON_FG,
+      UITextAttributeTextColor,
+      [UIColor colorWithWhite:0.0 alpha:0.5],
+      UITextAttributeTextShadowColor,
+      [NSValue valueWithUIOffset:UIOffsetMake(0, 0)], // 0,-1
+      UITextAttributeTextShadowOffset,
+      [UIFont fontWithName:BUTTON_FONT size:BUTTON_FONT_SIZE],
+      UITextAttributeFont,
+      nil]];
+    
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

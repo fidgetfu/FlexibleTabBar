@@ -20,6 +20,7 @@
 		7BCE96FB1469751600135C63 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE96FA1469751600135C63 /* main.m */; };
 		7BCE96FF1469751600135C63 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE96FE1469751600135C63 /* AppDelegate.m */; };
 		7BCE970D146975EA00135C63 /* CDListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE970C146975EA00135C63 /* CDListViewController.m */; };
+		E1E51C15175F4393001D810D /* fontello.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E1E51C14175F437B001D810D /* fontello.ttf */; };
 		E1ED3B19175DDCF200AF2685 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1ED3B17175DDCD600AF2685 /* CoreData.framework */; };
 		E1ED3B1C175DDE4000AF2685 /* coredataref.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1ED3B1A175DDE4000AF2685 /* coredataref.xcdatamodeld */; };
 		E1ED3B1F175DE1E400AF2685 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1ED3B1E175DE18200AF2685 /* ListViewController.m */; };
@@ -46,6 +47,7 @@
 		7BCE970B146975EA00135C63 /* CDListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDListViewController.h; sourceTree = "<group>"; };
 		7BCE970C146975EA00135C63 /* CDListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDListViewController.m; sourceTree = "<group>"; };
 		E1A55989175F1659002201FF /* FTB-Settings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "FTB-Settings.h"; path = "MHTabBarController/FTB-Settings.h"; sourceTree = SOURCE_ROOT; };
+		E1E51C14175F437B001D810D /* fontello.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fontello.ttf; sourceTree = "<group>"; };
 		E1ED3B17175DDCD600AF2685 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E1ED3B1B175DDE4000AF2685 /* coredataref.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = coredataref.xcdatamodel; sourceTree = "<group>"; };
 		E1ED3B1D175DE18200AF2685 /* ListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 		7BCE96F41469751600135C63 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				E1E51C14175F437B001D810D /* fontello.ttf */,
 				E1ED3B1A175DDE4000AF2685 /* coredataref.xcdatamodeld */,
 				7BCE96FD1469751600135C63 /* AppDelegate.h */,
 				7BCE96FE1469751600135C63 /* AppDelegate.m */,
@@ -197,6 +200,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1E51C15175F4393001D810D /* fontello.ttf in Resources */,
 				7BCE96F91469751600135C63 /* InfoPlist.strings in Resources */,
 				7B2C1D131683543D00542AC1 /* Default-568h@2x.png in Resources */,
 				7B2C1D1E1683544700542AC1 /* FlexibleTabBarIndicator.png in Resources */,

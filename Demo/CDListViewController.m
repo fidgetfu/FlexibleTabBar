@@ -12,7 +12,7 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, FTB_HEIGHT - 6)];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, FTB_SIZE - 6)];
     [backButton setBackgroundColor:[UIColor clearColor]];
     [backButton setTitle:@"+" forState:UIControlStateNormal];
     [backButton setTitleColor:BUTTON_FG forState:UIControlStateNormal];

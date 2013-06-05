@@ -31,31 +31,16 @@ static const NSInteger TagOffset = 1000;
 	UIImageView *indicatorImageView;
 }
 
-- (void)viewDidLoad {
-	[super viewDidLoad];
-
-	self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-
-	CGRect rect = CGRectMake(0.0f, 0.0f, self.view.bounds.size.width, FTB_HEIGHT);
-	tabButtonsContainerView = [[UIView alloc] initWithFrame:rect];
-	tabButtonsContainerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-	[self.view addSubview:tabButtonsContainerView];
-
-	rect.origin.y = FTB_HEIGHT;
-	rect.size.height = self.view.bounds.size.height - FTB_HEIGHT;
-	contentContainerView = [[UIView alloc] initWithFrame:rect];
-	contentContainerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-	[self.view addSubview:contentContainerView];
-
-	indicatorImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"FlexibleTabBarIndicator"]];
-	[self.view addSubview:indicatorImageView];
-
-	[self reloadTabButtons];
-}
-
-- (void)viewWillLayoutSubviews {
-	[super viewWillLayoutSubviews];
-	[self layoutTabButtons];
+- (void)didReceiveMemoryWarning {
+	[super didReceiveMemoryWarning];
+    
+	if ([self isViewLoaded] && self.view.window == nil)
+	{
+		self.view = nil;
+		tabButtonsContainerView = nil;
+		contentContainerView = nil;
+		indicatorImageView = nil;
+	}
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -68,51 +53,14 @@ static const NSInteger TagOffset = 1000;
 	return YES;
 }
 
-- (void)didReceiveMemoryWarning {
-	[super didReceiveMemoryWarning];
-
-	if ([self isViewLoaded] && self.view.window == nil)
-	{
-		self.view = nil;
-		tabButtonsContainerView = nil;
-		contentContainerView = nil;
-		indicatorImageView = nil;
-	}
-}
-
 - (void)reloadTabButtons {
 	[self removeTabButtons];
 	[self addTabButtons];
-
+    
 	// Force redraw of the previously active tab.
 	NSUInteger lastIndex = _selectedIndex;
 	_selectedIndex = NSNotFound;
 	self.selectedIndex = lastIndex;
-}
-
-- (void)addTabButtons {
-	NSUInteger index = 0;
-	for (UIViewController *viewController in self.viewControllers)
-	{
-		UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-		button.tag = TagOffset + index;
-		button.titleLabel.font = [UIFont fontWithName:BUTTON_FONT size:BUTTON_FONT_SIZE];
-		//button.titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
-
-		UIOffset offset = viewController.tabBarItem.titlePositionAdjustment;
-		button.titleEdgeInsets = UIEdgeInsetsMake(offset.vertical, offset.horizontal, 0.0f, 0.0f);
-		button.imageEdgeInsets = viewController.tabBarItem.imageInsets;
-        NSString *name = tabNameFromIndex(index);
-        // viewController.tabBarItem.title
-		[button setTitle:name forState:UIControlStateNormal];
-
-		[button addTarget:self action:@selector(tabButtonPressed:) forControlEvents:UIControlEventTouchDown];
-
-		[self deselectTabButton:button];
-		[tabButtonsContainerView addSubview:button];
-
-		++index;
-	}
 }
 
 - (void)removeTabButtons {
@@ -122,37 +70,178 @@ static const NSInteger TagOffset = 1000;
 	}
 }
 
+- (void)viewWillLayoutSubviews {
+	[super viewWillLayoutSubviews];
+	[self layoutTabButtons];
+}
+
+# pragma mark - geo
+-(CGRect)tabsRect {
+    CGFloat rectX, rectY, width, height;
+    
+    if (ftbIsTop || ftbIsBottom) {
+        height = FTB_SIZE;
+        width = self.view.bounds.size.width;
+        rectX = 0.0f;
+        if (ftbIsTop) rectY = 0.0f;
+        else rectY = self.view.bounds.size.height - height;
+    } else {
+        height = self.view.bounds.size.height;
+        width = FTB_SIZE;
+        rectY = 0.0f;
+        if (ftbIsLeft) rectX = 0.0f;
+        else rectX = self.view.bounds.size.width - width;
+    }
+    
+    CGRect thisRect = CGRectMake(rectX, rectY, width, height);
+    return thisRect;
+}
+
+-(CGRect)childViewRect {
+    CGFloat rectX, rectY, width, height;
+    
+    if (ftbIsTop || ftbIsBottom) {
+        height = self.view.bounds.size.height - FTB_SIZE;
+        width = self.view.bounds.size.width;
+        rectX = 0.0f;
+        if (ftbIsTop) rectY = FTB_SIZE;
+        else rectY = 0.0f;
+    } else {
+        height = self.view.bounds.size.height;
+        width = self.view.bounds.size.width - FTB_SIZE;
+        rectY = 0.0f;
+        if (ftbIsLeft) rectX = FTB_SIZE;
+        else rectX = 0.0f;
+    }
+    
+    CGRect thisRect = CGRectMake(rectX, rectY, width, height);
+    return thisRect;
+}
+
+# pragma mark - layout
+
+- (void)viewDidLoad {
+	[super viewDidLoad];
+
+	self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+
+	
+	tabButtonsContainerView = [[UIView alloc] initWithFrame:[self tabsRect]];
+	tabButtonsContainerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	[self.view addSubview:tabButtonsContainerView];
+
+	contentContainerView = [[UIView alloc] initWithFrame:[self childViewRect]];
+	contentContainerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	[self.view addSubview:contentContainerView];
+
+	indicatorImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"FlexibleTabBarIndicator"]];
+	[self.view addSubview:indicatorImageView];
+
+	[self reloadTabButtons];
+}
+
 - (void)layoutTabButtons {
 	NSUInteger index = 0;
 	NSUInteger count = [self.viewControllers count];
-
-	CGRect rect = CGRectMake(0.0f, 0.0f, floorf(self.view.bounds.size.width / count), FTB_HEIGHT);
-
+    
+    CGRect tabBarRect = [self tabsRect];
+    CGRect rect;
+    if (ftbIsTop || ftbIsBottom) rect = CGRectMake(0.0f, 0.0f, floorf(tabBarRect.size.width / count), FTB_SIZE);
+    else rect = CGRectMake(0.0f, 0.0f, FTB_SIZE, floorf(tabBarRect.size.height / count));
+    
 	indicatorImageView.hidden = YES;
-
+    
 	NSArray *buttons = [tabButtonsContainerView subviews];
-	for (UIButton *button in buttons)
-	{
-		if (index == count - 1)
-			rect.size.width = self.view.bounds.size.width - rect.origin.x;
-
-		button.frame = rect;
-		rect.origin.x += rect.size.width;
-
+	for (UIButton *button in buttons) {
+        
+        if (ftbIsTop || ftbIsBottom) {
+            if (index == count - 1) rect.size.width = self.view.bounds.size.width - rect.origin.x;
+            button.frame = rect;
+            rect.origin.x += rect.size.width;
+        } else {
+            if (index == count - 1) rect.size.height = self.view.bounds.size.height - rect.origin.y;
+            button.frame = rect;
+            rect.origin.y += rect.size.height;
+        }
+        
 		if (index == self.selectedIndex)
 			[self centerIndicatorOnButton:button];
-
+        
 		++index;
 	}
 }
 
 - (void)centerIndicatorOnButton:(UIButton *)button {
 	CGRect rect = indicatorImageView.frame;
-	rect.origin.x = button.center.x - floorf(indicatorImageView.frame.size.width/2.0f);
-	rect.origin.y = FTB_HEIGHT - indicatorImageView.frame.size.height;
+    if (ftbIsBottom || ftbIsTop) {
+        rect.origin.x = button.center.x - floorf(indicatorImageView.frame.size.width/2.0f);
+        if (ftbIsBottom) {
+            rect.origin.y = self.view.bounds.size.height - FTB_SIZE;
+            indicatorImageView.transform = CGAffineTransformMakeRotation(M_PI);
+        } else {
+            rect.origin.y = FTB_SIZE - indicatorImageView.frame.size.height;
+        }
+        
+    } else {
+        rect.origin.y = button.center.y - floorf(indicatorImageView.frame.size.height/2.0f);
+        if (ftbIsLeft) {
+            rect.origin.x = FTB_SIZE - indicatorImageView.frame.size.width;
+            indicatorImageView.transform = CGAffineTransformMakeRotation(-M_PI_2);
+        } else {
+            rect.origin.x = self.view.bounds.size.width - FTB_SIZE;
+            indicatorImageView.transform = CGAffineTransformMakeRotation(M_PI_2);
+        }
+        
+        
+    }
 	indicatorImageView.frame = rect;
 	indicatorImageView.hidden = NO;
 }
+
+#pragma mark - button look
+
+- (void)addTabButtons {
+	NSUInteger index = 0;
+	for (UIViewController *viewController in self.viewControllers)
+	{
+		UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+		button.tag = TagOffset + index;
+		button.titleLabel.font = [UIFont fontWithName:BUTTON_FONT size:BUTTON_FONT_SIZE];
+		//button.titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+        
+		UIOffset offset = viewController.tabBarItem.titlePositionAdjustment;
+		button.titleEdgeInsets = UIEdgeInsetsMake(offset.vertical, offset.horizontal, 0.0f, 0.0f);
+		//button.imageEdgeInsets = viewController.tabBarItem.imageInsets;
+        NSString *name = tabNameFromIndex(index);
+        // viewController.tabBarItem.title
+		[button setTitle:name forState:UIControlStateNormal];
+        
+		[button addTarget:self action:@selector(tabButtonPressed:) forControlEvents:UIControlEventTouchDown];
+        
+		[self deselectTabButton:button];
+		[tabButtonsContainerView addSubview:button];
+        
+		++index;
+	}
+}
+
+- (void)selectTabButton:(UIButton *)button {
+    
+    [button setBackgroundColor: BUTTON_HIGHLIGHT];
+	[button setTitleColor:BUTTON_FG forState:UIControlStateNormal];
+    
+    //	[button setTitleShadowColor:[UIColor colorWithWhite:0.0f alpha:0.5f] forState:UIControlStateNormal];
+}
+
+- (void)deselectTabButton:(UIButton *)button {
+    
+    [button setBackgroundColor: BUTTON_BG];
+	[button setTitleColor:BUTTON_FG forState:UIControlStateNormal];
+    
+    //	[button setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
+}
+
+# pragma mark - view controller organisation
 
 - (void)setViewControllers:(NSArray *)newViewControllers {
 	NSAssert([newViewControllers count] >= 2, @"FlexibleTabBarController requires at least two view controllers");
@@ -235,7 +324,7 @@ static const NSInteger TagOffset = 1000;
 			[fromViewController.view removeFromSuperview];
 		}
 		else if (fromViewController == nil)  // don't animate
-		{
+        {
 			toViewController.view.frame = contentContainerView.bounds;
 			[contentContainerView addSubview:toViewController.view];
 			[self centerIndicatorOnButton:toButton];
@@ -243,29 +332,38 @@ static const NSInteger TagOffset = 1000;
 			if ([self.delegate respondsToSelector:@selector(flex_tabBarController:didSelectViewController:atIndex:)])
 				[self.delegate flex_tabBarController:self didSelectViewController:toViewController atIndex:newSelectedIndex];
 		}
-		else if (animated)
-		{
+		else if (animated) {
 			CGRect rect = contentContainerView.bounds;
-			if (oldSelectedIndex < newSelectedIndex)
-				rect.origin.x = rect.size.width;
-			else
-				rect.origin.x = -rect.size.width;
-
+            
+			if (oldSelectedIndex < newSelectedIndex) {
+                // going right to left
+				if (ftbIsBottom || ftbIsTop) rect.origin.x = rect.size.width;
+                if (ftbIsLeft) rect.origin.x = rect.size.width - FTB_SIZE;
+            } else {
+                // going left to right
+				if (ftbIsBottom || ftbIsTop) rect.origin.x = -rect.size.width;
+                if (ftbIsLeft) rect.origin.x = - rect.size.width - FTB_SIZE;
+            }
+            
 			toViewController.view.frame = rect;
 			tabButtonsContainerView.userInteractionEnabled = NO;
 
 			[self transitionFromViewController:fromViewController
 				toViewController:toViewController
-				duration:0.3f
+				duration:3.0f // 0.3f
 				options:UIViewAnimationOptionLayoutSubviews | UIViewAnimationOptionCurveEaseOut
 				animations:^
 				{
 					CGRect rect = fromViewController.view.frame;
-					if (oldSelectedIndex < newSelectedIndex)
-						rect.origin.x = -rect.size.width;
-					else
-						rect.origin.x = rect.size.width;
-
+                    
+					if (oldSelectedIndex < newSelectedIndex) {
+						if (ftbIsBottom || ftbIsTop) rect.origin.x = -rect.size.width;
+                        if (ftbIsLeft) rect.origin.x = - rect.size.width - FTB_SIZE;
+					} else {
+						if (ftbIsBottom || ftbIsTop) rect.origin.x = rect.size.width;
+                        if (ftbIsLeft) rect.origin.x = rect.size.width - FTB_SIZE;
+                    }
+                    
 					fromViewController.view.frame = rect;
 					toViewController.view.frame = contentContainerView.bounds;
 					[self centerIndicatorOnButton:toButton];
@@ -277,6 +375,7 @@ static const NSInteger TagOffset = 1000;
 					if ([self.delegate respondsToSelector:@selector(flex_tabBarController:didSelectViewController:atIndex:)])
 						[self.delegate flex_tabBarController:self didSelectViewController:toViewController atIndex:newSelectedIndex];
 				}];
+            
 		}
 		else  // not animated
 		{
@@ -310,25 +409,12 @@ static const NSInteger TagOffset = 1000;
 }
 
 - (void)tabButtonPressed:(UIButton *)sender {
-	[self setSelectedIndex:sender.tag - TagOffset animated:YES];
+    // check for the header defined value
+    BOOL shouldAnimate = FTB_ANIMATED;
+    // override if tab bar is vertical
+    if (ftbIsLeft || ftbIsRight) shouldAnimate = NO;
+	[self setSelectedIndex:sender.tag - TagOffset animated:shouldAnimate];
 }
 
-#pragma mark - Change these methods to customize the look of the buttons
-
-- (void)selectTabButton:(UIButton *)button {
-    
-    [button setBackgroundColor: BUTTON_HIGHLIGHT];
-	[button setTitleColor:BUTTON_FG forState:UIControlStateNormal];
-
-//	[button setTitleShadowColor:[UIColor colorWithWhite:0.0f alpha:0.5f] forState:UIControlStateNormal];
-}
-
-- (void)deselectTabButton:(UIButton *)button {
-    
-    [button setBackgroundColor: BUTTON_BG];
-	[button setTitleColor:BUTTON_FG forState:UIControlStateNormal];
-
-//	[button setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
-}
 
 @end
