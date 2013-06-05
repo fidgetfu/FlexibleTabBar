@@ -15,6 +15,7 @@
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, FTB_SIZE - 6)];
     [backButton setBackgroundColor:[UIColor clearColor]];
     [backButton setTitle:@"+" forState:UIControlStateNormal];
+    [backButton.titleLabel setFont:[UIFont fontWithName:BUTTON_FONT size:30.0f]];
     [backButton setTitleColor:BUTTON_FG forState:UIControlStateNormal];
     [backButton setTitleColor:BUTTON_HIGHLIGHT forState:UIControlStateHighlighted];
     [backButton addTarget:self action:@selector(insertNewObject:) forControlEvents:UIControlEventTouchUpInside];

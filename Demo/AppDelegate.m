@@ -13,9 +13,9 @@
 -(void)customiseAppearance {
     // CUSTOMISE NAV BARS
     [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    [[UINavigationBar appearance] setBackgroundColor:BUTTON_HIGHLIGHT];
+    [[UINavigationBar appearance] setBackgroundColor:[UIColor colorWithRed:0.14 green:0.87 blue:0.72 alpha:1.0]];
     [[UIToolbar appearance] setBackgroundImage:[UIImage alloc] forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
-    [[UIToolbar appearance] setBackgroundColor:BUTTON_HIGHLIGHT];
+    [[UIToolbar appearance] setBackgroundColor:[UIColor colorWithRed:0.14 green:0.87 blue:0.72 alpha:1.0]];
     [[UINavigationBar appearance] setTitleTextAttributes:
      [NSDictionary dictionaryWithObjectsAndKeys:
       BUTTON_FG,
@@ -24,7 +24,7 @@
       UITextAttributeTextShadowColor,
       [NSValue valueWithUIOffset:UIOffsetMake(0, 0)], // 0,-1
       UITextAttributeTextShadowOffset,
-      [UIFont fontWithName:BUTTON_FONT size:BUTTON_FONT_SIZE],
+      [UIFont systemFontOfSize:22.0f],
       UITextAttributeFont,
       nil]];
     
@@ -51,14 +51,9 @@
     
     // 3rd 4th and 5th views
 	ListViewController *ListViewController3 = [[ListViewController alloc] initWithStyle:UITableViewStylePlain];
-    ListViewController *ListViewController4 = [[ListViewController alloc] initWithStyle:UITableViewStylePlain];
-    ListViewController *ListViewController5 = [[ListViewController alloc] initWithStyle:UITableViewStylePlain];
     ListViewController3.title = @"tag";
-    ListViewController4.title = @"star";
-    ListViewController5.title = @"other";
-    
 
-	NSArray *viewControllers = @[navigationController1, navigationController2, ListViewController3, ListViewController4, ListViewController5];
+	NSArray *viewControllers = @[navigationController1, navigationController2, ListViewController3];
 	FlexibleTabBarController *tabBarController = [[FlexibleTabBarController alloc] init];
 
 	tabBarController.delegate = self;
