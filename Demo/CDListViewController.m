@@ -15,7 +15,6 @@
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, FTB_HEIGHT - 6)];
     [backButton setBackgroundColor:[UIColor clearColor]];
     [backButton setTitle:@"+" forState:UIControlStateNormal];
-    [backButton.titleLabel setFont:[UIFont fontWithName:@"fontello" size:26.0f]];
     [backButton setTitleColor:BUTTON_FG forState:UIControlStateNormal];
     [backButton setTitleColor:BUTTON_HIGHLIGHT forState:UIControlStateHighlighted];
     [backButton addTarget:self action:@selector(insertNewObject:) forControlEvents:UIControlEventTouchUpInside];
@@ -225,8 +224,7 @@
 {
     NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ - Row %d @ %@", self.title,
-                           indexPath.row, [[object valueForKey:@"timeStamp"] description]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", self.title, [[object valueForKey:@"timeStamp"] description]];
     cell.textLabel.font = [UIFont fontWithName:@"Open Sans" size:18];
 }
 

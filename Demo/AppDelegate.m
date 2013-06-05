@@ -16,30 +16,7 @@
     [[UINavigationBar appearance] setBackgroundColor:BUTTON_BG];
     [[UIToolbar appearance] setBackgroundImage:[UIImage alloc] forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
     [[UIToolbar appearance] setBackgroundColor:BUTTON_BG];
-    
-    [[UINavigationBar appearance] setTitleTextAttributes:
-     [NSDictionary dictionaryWithObjectsAndKeys:
-      BUTTON_FG,
-      UITextAttributeTextColor,
-      BUTTON_FG,
-      UITextAttributeTextShadowColor,
-      [NSValue valueWithUIOffset:UIOffsetMake(0, 1)], // 0,-1
-      UITextAttributeTextShadowOffset,
-      [UIFont fontWithName:@"Open Sans" size:26.0f],
-      UITextAttributeFont,
-      nil]];
-    
-    [[UIBarButtonItem appearance] setTitleTextAttributes:
-     [NSDictionary dictionaryWithObjectsAndKeys:
-      BUTTON_FG,
-      UITextAttributeTextColor,
-      BUTTON_FG,
-      UITextAttributeTextShadowColor,
-      [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
-      UITextAttributeTextShadowOffset,
-      [UIFont fontWithName:@"fontello" size:26.0f],
-      UITextAttributeFont,
-      nil] forState:UIControlStateNormal];
+
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -51,12 +28,12 @@
     // 1st view
 	CDListViewController *CDListViewController1 = [[CDListViewController alloc] initWithStyle:UITableViewStylePlain];
     CDListViewController1.managedObjectContext = self.managedObjectContext;
-    CDListViewController1.title = @"r";
+    CDListViewController1.title = @"rocket";
     UINavigationController * navigationController1 = [[UINavigationController alloc]
                                                      initWithRootViewController:CDListViewController1];
     // 2nd view
 	CDListViewController *CDListViewController2 = [[CDListViewController alloc] initWithStyle:UITableViewStylePlain];
-    CDListViewController2.title = @"c";
+    CDListViewController2.title = @"clock";
 	CDListViewController2.managedObjectContext = self.managedObjectContext;
     UINavigationController * navigationController2 = [[UINavigationController alloc]
                                                      initWithRootViewController:CDListViewController2];
@@ -65,9 +42,9 @@
 	ListViewController *ListViewController3 = [[ListViewController alloc] initWithStyle:UITableViewStylePlain];
     ListViewController *ListViewController4 = [[ListViewController alloc] initWithStyle:UITableViewStylePlain];
     ListViewController *ListViewController5 = [[ListViewController alloc] initWithStyle:UITableViewStylePlain];
-    ListViewController3.title = @"1";
-    ListViewController4.title = @"s";
-    ListViewController5.title = @"7";
+    ListViewController3.title = @"tag";
+    ListViewController4.title = @"star";
+    ListViewController5.title = @"other";
     
 
 	NSArray *viewControllers = @[navigationController1, navigationController2, ListViewController3, ListViewController4, ListViewController5];

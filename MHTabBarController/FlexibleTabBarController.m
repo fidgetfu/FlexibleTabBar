@@ -96,14 +96,15 @@ static const NSInteger TagOffset = 1000;
 	{
 		UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
 		button.tag = TagOffset + index;
-		button.titleLabel.font = [UIFont fontWithName:@"fontello" size:36];
-		button.titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+		button.titleLabel.font = [UIFont fontWithName:BUTTON_FONT size:BUTTON_FONT_SIZE];
+		//button.titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
 
 		UIOffset offset = viewController.tabBarItem.titlePositionAdjustment;
 		button.titleEdgeInsets = UIEdgeInsetsMake(offset.vertical, offset.horizontal, 0.0f, 0.0f);
 		button.imageEdgeInsets = viewController.tabBarItem.imageInsets;
-		[button setTitle:viewController.tabBarItem.title forState:UIControlStateNormal];
-		[button setImage:viewController.tabBarItem.image forState:UIControlStateNormal];
+        NSString *name = tabNameFromIndex(index);
+        // viewController.tabBarItem.title
+		[button setTitle:name forState:UIControlStateNormal];
 
 		[button addTarget:self action:@selector(tabButtonPressed:) forControlEvents:UIControlEventTouchDown];
 
