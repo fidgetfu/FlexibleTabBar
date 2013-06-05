@@ -21,6 +21,7 @@
  */
 
 #import "FlexibleTabBarController.h"
+#import "FTB-Settings.h"
 
 static const NSInteger TagOffset = 1000;
 
@@ -35,13 +36,13 @@ static const NSInteger TagOffset = 1000;
 
 	self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
-	CGRect rect = CGRectMake(0.0f, 0.0f, self.view.bounds.size.width, self.tabBarHeight);
+	CGRect rect = CGRectMake(0.0f, 0.0f, self.view.bounds.size.width, FTB_HEIGHT);
 	tabButtonsContainerView = [[UIView alloc] initWithFrame:rect];
 	tabButtonsContainerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	[self.view addSubview:tabButtonsContainerView];
 
-	rect.origin.y = self.tabBarHeight;
-	rect.size.height = self.view.bounds.size.height - self.tabBarHeight;
+	rect.origin.y = FTB_HEIGHT;
+	rect.size.height = self.view.bounds.size.height - FTB_HEIGHT;
 	contentContainerView = [[UIView alloc] initWithFrame:rect];
 	contentContainerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	[self.view addSubview:contentContainerView];
@@ -124,7 +125,7 @@ static const NSInteger TagOffset = 1000;
 	NSUInteger index = 0;
 	NSUInteger count = [self.viewControllers count];
 
-	CGRect rect = CGRectMake(0.0f, 0.0f, floorf(self.view.bounds.size.width / count), self.tabBarHeight);
+	CGRect rect = CGRectMake(0.0f, 0.0f, floorf(self.view.bounds.size.width / count), FTB_HEIGHT);
 
 	indicatorImageView.hidden = YES;
 
@@ -147,7 +148,7 @@ static const NSInteger TagOffset = 1000;
 - (void)centerIndicatorOnButton:(UIButton *)button {
 	CGRect rect = indicatorImageView.frame;
 	rect.origin.x = button.center.x - floorf(indicatorImageView.frame.size.width/2.0f);
-	rect.origin.y = self.tabBarHeight - indicatorImageView.frame.size.height;
+	rect.origin.y = FTB_HEIGHT - indicatorImageView.frame.size.height;
 	indicatorImageView.frame = rect;
 	indicatorImageView.hidden = NO;
 }
@@ -314,29 +315,19 @@ static const NSInteger TagOffset = 1000;
 #pragma mark - Change these methods to customize the look of the buttons
 
 - (void)selectTabButton:(UIButton *)button {
-	[button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    
+    [button setBackgroundColor: BUTTON_HIGHLIGHT];
+	[button setTitleColor:BUTTON_FG forState:UIControlStateNormal];
 
-	UIImage *image = [[UIImage imageNamed:@"FlexibleTabBarActiveTab"] stretchableImageWithLeftCapWidth:0 topCapHeight:0];
-	[button setBackgroundImage:image forState:UIControlStateNormal];
-	[button setBackgroundImage:image forState:UIControlStateHighlighted];
-	
-	[button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-	[button setTitleShadowColor:[UIColor colorWithWhite:0.0f alpha:0.5f] forState:UIControlStateNormal];
+//	[button setTitleShadowColor:[UIColor colorWithWhite:0.0f alpha:0.5f] forState:UIControlStateNormal];
 }
 
 - (void)deselectTabButton:(UIButton *)button {
-	[button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
+    [button setBackgroundColor: BUTTON_BG];
+	[button setTitleColor:BUTTON_FG forState:UIControlStateNormal];
 
-	UIImage *image = [[UIImage imageNamed:@"FlexibleTabBarInactiveTab"] stretchableImageWithLeftCapWidth:1 topCapHeight:0];
-	[button setBackgroundImage:image forState:UIControlStateNormal];
-	[button setBackgroundImage:image forState:UIControlStateHighlighted];
-
-	[button setTitleColor:[UIColor colorWithRed:175/255.0f green:85/255.0f blue:58/255.0f alpha:1.0f] forState:UIControlStateNormal];
-	[button setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
-}
-
-- (CGFloat)tabBarHeight {
-	return 54.0f;
+//	[button setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
 }
 
 @end

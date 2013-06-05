@@ -2,6 +2,7 @@
 #import "AppDelegate.h"
 #import "CDListViewController.h"
 #import "ListViewController.h"
+#import "FTB-Settings.h"
 
 @implementation AppDelegate
 
@@ -9,29 +10,67 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
+-(void)customiseAppearance {
+    // CUSTOMISE NAV BARS
+    [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setBackgroundColor:BUTTON_BG];
+    [[UIToolbar appearance] setBackgroundImage:[UIImage alloc] forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
+    [[UIToolbar appearance] setBackgroundColor:BUTTON_BG];
+    
+    [[UINavigationBar appearance] setTitleTextAttributes:
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      BUTTON_FG,
+      UITextAttributeTextColor,
+      BUTTON_FG,
+      UITextAttributeTextShadowColor,
+      [NSValue valueWithUIOffset:UIOffsetMake(0, 1)], // 0,-1
+      UITextAttributeTextShadowOffset,
+      [UIFont fontWithName:@"Open Sans" size:26.0f],
+      UITextAttributeFont,
+      nil]];
+    
+    [[UIBarButtonItem appearance] setTitleTextAttributes:
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      BUTTON_FG,
+      UITextAttributeTextColor,
+      BUTTON_FG,
+      UITextAttributeTextShadowColor,
+      [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
+      UITextAttributeTextShadowOffset,
+      [UIFont fontWithName:@"fontello" size:26.0f],
+      UITextAttributeFont,
+      nil] forState:UIControlStateNormal];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [self insertNewObject:self];
+    [self customiseAppearance];
     
+    // SET UP TAB BAR CONTROLLER
+    
+    // 1st view
 	CDListViewController *CDListViewController1 = [[CDListViewController alloc] initWithStyle:UITableViewStylePlain];
+    CDListViewController1.managedObjectContext = self.managedObjectContext;
+    CDListViewController1.title = @"r";
+    UINavigationController * navigationController1 = [[UINavigationController alloc]
+                                                     initWithRootViewController:CDListViewController1];
+    // 2nd view
 	CDListViewController *CDListViewController2 = [[CDListViewController alloc] initWithStyle:UITableViewStylePlain];
+    CDListViewController2.title = @"c";
+	CDListViewController2.managedObjectContext = self.managedObjectContext;
+    UINavigationController * navigationController2 = [[UINavigationController alloc]
+                                                     initWithRootViewController:CDListViewController2];
+    
+    // 3rd 4th and 5th views
 	ListViewController *ListViewController3 = [[ListViewController alloc] initWithStyle:UITableViewStylePlain];
     ListViewController *ListViewController4 = [[ListViewController alloc] initWithStyle:UITableViewStylePlain];
     ListViewController *ListViewController5 = [[ListViewController alloc] initWithStyle:UITableViewStylePlain];
-	
-	CDListViewController1.title = @"r";
-    CDListViewController1.managedObjectContext = self.managedObjectContext;
-	CDListViewController2.title = @"c";
-	CDListViewController2.managedObjectContext = self.managedObjectContext;
     ListViewController3.title = @"1";
     ListViewController4.title = @"s";
     ListViewController5.title = @"7";
+    
 
-//	CDListViewController2.tabBarItem.image = [UIImage imageNamed:@"Taijitu"];
-//	CDListViewController2.tabBarItem.imageInsets = UIEdgeInsetsMake(0.0f, -4.0f, 0.0f, 0.0f);
-//	CDListViewController2.tabBarItem.titlePositionAdjustment = UIOffsetMake(4.0f, 0.0f);
-
-	NSArray *viewControllers = @[CDListViewController1, CDListViewController2, ListViewController3, ListViewController4, ListViewController5];
+	NSArray *viewControllers = @[navigationController1, navigationController2, ListViewController3, ListViewController4, ListViewController5];
 	FlexibleTabBarController *tabBarController = [[FlexibleTabBarController alloc] init];
 
 	tabBarController.delegate = self;
@@ -42,6 +81,7 @@
 	// Uncomment this to select "Tab 3".
 	//tabBarController.selectedViewController = CDListViewController3;
 
+    // CREATE THE WINDOW
 	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	self.window.rootViewController = tabBarController;
 	[self.window makeKeyAndVisible];

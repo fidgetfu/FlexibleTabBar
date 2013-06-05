@@ -1,7 +1,7 @@
 
 #import "ListViewController.h"
 #import "FlexibleTabBarController.h"
-
+#import "FTB-Settings.h"
 @implementation ListViewController
 
 - (void)dealloc

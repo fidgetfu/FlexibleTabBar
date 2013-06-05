@@ -2,6 +2,7 @@
 #import "CDListViewController.h"
 #import "ListViewController.h"
 #import "FlexibleTabBarController.h"
+#import "FTB-Settings.h"
 
 @implementation CDListViewController
 
@@ -11,6 +12,14 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, FTB_HEIGHT - 6)];
+    [backButton setBackgroundColor:[UIColor clearColor]];
+    [backButton setTitle:@"+" forState:UIControlStateNormal];
+    [backButton.titleLabel setFont:[UIFont fontWithName:@"fontello" size:26.0f]];
+    [backButton setTitleColor:BUTTON_FG forState:UIControlStateNormal];
+    [backButton setTitleColor:BUTTON_HIGHLIGHT forState:UIControlStateHighlighted];
+    [backButton addTarget:self action:@selector(insertNewObject:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

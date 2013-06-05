@@ -57,6 +57,7 @@
 		7BCE970C146975EA00135C63 /* CDListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDListViewController.m; sourceTree = "<group>"; };
 		E1BA6B04175E03B1006C82C8 /* OpenSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = OpenSans.ttf; sourceTree = "<group>"; };
 		E1BA6B07175E1479006C82C8 /* fontello.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fontello.ttf; sourceTree = "<group>"; };
+		E1C8A521175EEAE50084CCA2 /* FTB-Settings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FTB-Settings.h"; sourceTree = "<group>"; };
 		E1ED3B17175DDCD600AF2685 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E1ED3B1B175DDE4000AF2685 /* coredataref.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = coredataref.xcdatamodel; sourceTree = "<group>"; };
 		E1ED3B1D175DE18200AF2685 /* ListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
@@ -92,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				E1ED3B20175DE96400AF2685 /* original images */,
+				E1C8A521175EEAE50084CCA2 /* FTB-Settings.h */,
 				7B5C62CA168242E9005C3BD4 /* FlexibleTabBarController.h */,
 				7B5C62CB168242E9005C3BD4 /* FlexibleTabBarController.m */,
 				7B2C1D181683544700542AC1 /* FlexibleTabBarIndicator.png */,
