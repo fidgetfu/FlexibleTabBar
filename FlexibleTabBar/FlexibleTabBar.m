@@ -300,7 +300,7 @@ static const NSInteger TagOffset = 1000;
 - (void)setSelectedIndex:(NSUInteger)newSelectedIndex animated:(BOOL)animated {
 	NSAssert(newSelectedIndex < [self.viewControllers count], @"View controller index out of bounds");
     
-	if ([self.delegate respondsToSelector:@selector(flex_tabBarController:shouldSelectViewController:atIndex:)])
+	if ([self.delegate respondsToSelector:@selector(flexTabBar:shouldSelectViewController:atIndex:)])
 	{
 		UIViewController *toViewController = (self.viewControllers)[newSelectedIndex];
 		if (![self.delegate flexTabBar:self shouldSelectViewController:toViewController atIndex:newSelectedIndex])
@@ -344,7 +344,7 @@ static const NSInteger TagOffset = 1000;
 			[contentContainerView addSubview:toViewController.view];
 			[self centerIndicatorOnButton:toButton];
             
-			if ([self.delegate respondsToSelector:@selector(flex_tabBarController:didSelectViewController:atIndex:)])
+			if ([self.delegate respondsToSelector:@selector(flexTabBar:didSelectViewController:atIndex:)])
 				[self.delegate flexTabBar:self didSelectViewController:toViewController atIndex:newSelectedIndex];
 		}
 		else if (animated) {
@@ -391,7 +391,7 @@ static const NSInteger TagOffset = 1000;
              {
                  tabButtonsContainerView.userInteractionEnabled = YES;
                  
-                 if ([self.delegate respondsToSelector:@selector(flex_tabBarController:didSelectViewController:atIndex:)])
+                 if ([self.delegate respondsToSelector:@selector(flexTabBar:didSelectViewController:atIndex:)])
                      [self.delegate flexTabBar:self didSelectViewController:toViewController atIndex:newSelectedIndex];
              }];
             
@@ -404,7 +404,7 @@ static const NSInteger TagOffset = 1000;
 			[contentContainerView addSubview:toViewController.view];
 			[self centerIndicatorOnButton:toButton];
             
-			if ([self.delegate respondsToSelector:@selector(flex_tabBarController:didSelectViewController:atIndex:)])
+			if ([self.delegate respondsToSelector:@selector(flexTabBar:didSelectViewController:atIndex:)])
 				[self.delegate flexTabBar:self didSelectViewController:toViewController atIndex:newSelectedIndex];
 		}
 	}

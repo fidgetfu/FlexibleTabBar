@@ -1,3 +1,10 @@
+//
+//  AppDelegate.m
+//  FTB-Demo
+//
+//  Created by Amy Nugent on 14/08/13.
+//  Copyright (c) 2013 Amy Nugent. All rights reserved.
+//
 
 #import "AppDelegate.h"
 #import "ListView.h"
@@ -9,9 +16,9 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{   /*
+{
+    /*
      * SETTING UP FLEXIBLE TAB BAR
      * Here's how to use FlexibleTabBar with a few different views
      */
@@ -21,7 +28,7 @@
 	ListView *ListView1 = [[ListView alloc] initWithStyle:UITableViewStylePlain];
     ListView1.title = @"coded view";
     UINavigationController * navigationController1 = [[UINavigationController alloc]
-                                                     initWithRootViewController:ListView1];
+                                                      initWithRootViewController:ListView1];
     // 2nd view - a storyboard defined view
     UIStoryboard *viewStoryboard;
     if (IS_IPAD) viewStoryboard = [UIStoryboard storyboardWithName:@"ipad" bundle:nil];
@@ -30,19 +37,19 @@
     viewController.title = @"storyboard";
     UINavigationController * navigationController2 = [[UINavigationController alloc]
                                                       initWithRootViewController:viewController];
-
+    
     // Set up the tab bar controller with those views
 	NSArray *viewControllers = @[navigationController1, navigationController2];
 	FlexibleTabBar *tabBarController = [[FlexibleTabBar alloc] init];
-
+    
 	tabBarController.delegate = self;
 	tabBarController.viewControllers = viewControllers;
-
+    
 	// Can select a tab to be open by default like this:
 	//tabBarController.selectedIndex = 1;
 	// OR like this:
 	//tabBarController.selectedViewController = ListView3;
-
+    
     // CREATE THE WINDOW
 	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	self.window.rootViewController = tabBarController;
@@ -50,10 +57,10 @@
 	return YES;
 }
 
-/* 
-    These are OPTIONAL
-    delegate methods.
-*/
+/*
+ These are OPTIONAL
+ delegate methods.
+ */
 
 - (BOOL)flexTabBar:(FlexibleTabBar *)tabBarController shouldSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index {
 	
@@ -72,19 +79,17 @@
     [self saveContext];
 }
 
-# pragma mark - Core Data
-
 - (void)saveContext
 {
     NSError *error = nil;
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
     if (managedObjectContext != nil) {
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+             // Replace this implementation with code to handle the error appropriately.
+             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
-        }
+        } 
     }
 }
 
@@ -113,7 +118,7 @@
     if (_managedObjectModel != nil) {
         return _managedObjectModel;
     }
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"DataModel" withExtension:@"momd"];
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"FTB_Demo" withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return _managedObjectModel;
 }
@@ -126,7 +131,7 @@
         return _persistentStoreCoordinator;
     }
     
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"DataModel.sqlite"];
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"FTB_Demo.sqlite"];
     
     NSError *error = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
@@ -134,7 +139,7 @@
         /*
          Replace this implementation with code to handle the error appropriately.
          
-         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
          
          Typical reasons for an error here include:
          * The persistent store is not accessible;
@@ -156,7 +161,7 @@
          */
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
-    }
+    }    
     
     return _persistentStoreCoordinator;
 }

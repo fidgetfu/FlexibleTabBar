@@ -21,9 +21,9 @@
  *  Edit these settings to get FTB to fit the look of your app
  */
 
-#define     FTB_SIZE            56.0f
+#define     FTB_SIZE            50.0f
 #define     FTB_ORIENT_IPHONE   @"bottom"
-#define     FTB_ORIENT_IPAD     @"left"
+#define     FTB_ORIENT_IPAD     @"bottom"
 #define     FTB_ANIMATED        NO
 
 #define     BUTTON_BG           [UIColor colorWithRed:0.69 green:0.75 blue:0.76 alpha:1.0]
