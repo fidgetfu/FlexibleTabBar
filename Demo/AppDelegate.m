@@ -1,7 +1,6 @@
 
 #import "AppDelegate.h"
-#import "CDListViewController.h"
-#import "ListViewController.h"
+#import "ListView.h"
 #import "FTB-Settings.h"
 
 @implementation AppDelegate
@@ -12,20 +11,23 @@
 
 -(void)customiseAppearance {
     // CUSTOMISE NAV BARS
-    [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    [[UINavigationBar appearance] setBackgroundColor:[UIColor colorWithRed:0.14 green:0.87 blue:0.72 alpha:1.0]];
-    [[UIToolbar appearance] setBackgroundImage:[UIImage alloc] forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
-    [[UIToolbar appearance] setBackgroundColor:[UIColor colorWithRed:0.14 green:0.87 blue:0.72 alpha:1.0]];
+    [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init]
+                                       forBarMetrics:UIBarMetricsDefault];
+    
+    [[UINavigationBar appearance] setBackgroundColor:BUTTON_BG];
+    
+    [[UIToolbar appearance] setBackgroundImage:[UIImage alloc]
+                            forToolbarPosition:UIToolbarPositionAny
+                                    barMetrics:UIBarMetricsDefault];
+    
+    [[UIToolbar appearance] setBackgroundColor:BUTTON_BG];
+    
     [[UINavigationBar appearance] setTitleTextAttributes:
      [NSDictionary dictionaryWithObjectsAndKeys:
       BUTTON_FG,
-      UITextAttributeTextColor,
-      [UIColor colorWithWhite:0.0 alpha:0.5],
-      UITextAttributeTextShadowColor,
-      [NSValue valueWithUIOffset:UIOffsetMake(0, 0)], // 0,-1
-      UITextAttributeTextShadowOffset,
+      NSForegroundColorAttributeName,
       [UIFont systemFontOfSize:22.0f],
-      UITextAttributeFont,
+      NSFontAttributeName,
       nil]];
     
 }
@@ -37,23 +39,23 @@
     // SET UP TAB BAR CONTROLLER
     
     // 1st view
-	CDListViewController *CDListViewController1 = [[CDListViewController alloc] initWithStyle:UITableViewStylePlain];
-    CDListViewController1.managedObjectContext = self.managedObjectContext;
-    CDListViewController1.title = @"rocket";
+	ListView *ListView1 = [[ListView alloc] initWithStyle:UITableViewStylePlain];
+    ListView1.managedObjectContext = self.managedObjectContext;
+    ListView1.title = @"rocket";
     UINavigationController * navigationController1 = [[UINavigationController alloc]
-                                                     initWithRootViewController:CDListViewController1];
+                                                     initWithRootViewController:ListView1];
     // 2nd view
-	CDListViewController *CDListViewController2 = [[CDListViewController alloc] initWithStyle:UITableViewStylePlain];
-    CDListViewController2.title = @"clock";
-	CDListViewController2.managedObjectContext = self.managedObjectContext;
+	ListView *ListView2 = [[ListView alloc] initWithStyle:UITableViewStylePlain];
+    ListView2.title = @"clock";
+	ListView2.managedObjectContext = self.managedObjectContext;
     UINavigationController * navigationController2 = [[UINavigationController alloc]
-                                                     initWithRootViewController:CDListViewController2];
+                                                     initWithRootViewController:ListView2];
     
     // 3rd 4th and 5th views
-	ListViewController *ListViewController3 = [[ListViewController alloc] initWithStyle:UITableViewStylePlain];
-    ListViewController3.title = @"tag";
+	ListView *ListView3 = [[ListView alloc] initWithStyle:UITableViewStylePlain];
+    ListView3.title = @"tag";
 
-	NSArray *viewControllers = @[navigationController1, navigationController2, ListViewController3];
+	NSArray *viewControllers = @[navigationController1, navigationController2, ListView3];
 	FlexibleTabBarController *tabBarController = [[FlexibleTabBarController alloc] init];
 
 	tabBarController.delegate = self;
@@ -62,7 +64,7 @@
 	// Uncomment this to select "Tab 2".
 	//tabBarController.selectedIndex = 1;
 	// Uncomment this to select "Tab 3".
-	//tabBarController.selectedViewController = CDListViewController3;
+	//tabBarController.selectedViewController = ListView3;
 
     // CREATE THE WINDOW
 	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -88,25 +90,16 @@
     [self saveContext];
 }
 
-
+# pragma mark - Core Data
 
 - (void)insertNewObject:(id)sender
 {
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:self.managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:self.managedObjectContext];
     NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:self.managedObjectContext];
     
-    // If appropriate, configure the new managed object.
-    // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
     [newManagedObject setValue:[NSDate date] forKey:@"timeStamp"];
     
-    // Save the context.
-    NSError *error = nil;
-    if (![self.managedObjectContext save:&error]) {
-        // Replace this implementation with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
+    [self saveContext];
 }
 
 - (void)saveContext
@@ -148,7 +141,7 @@
     if (_managedObjectModel != nil) {
         return _managedObjectModel;
     }
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"coredataref" withExtension:@"momd"];
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"DataModel" withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return _managedObjectModel;
 }
@@ -161,7 +154,7 @@
         return _persistentStoreCoordinator;
     }
     
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"coredataref.sqlite"];
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"DataModel.sqlite"];
     
     NSError *error = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];

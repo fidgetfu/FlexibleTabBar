@@ -1,57 +1,24 @@
 
-#import "CDListViewController.h"
-#import "ListViewController.h"
+#import "ListView.h"
 #import "FlexibleTabBarController.h"
 #import "FTB-Settings.h"
 
-@implementation CDListViewController
-
-- (void)dealloc {
-    
-}
+@implementation ListView
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, FTB_SIZE - 6)];
-    [backButton setBackgroundColor:[UIColor clearColor]];
-    [backButton setTitle:@"+" forState:UIControlStateNormal];
-    [backButton.titleLabel setFont:[UIFont fontWithName:BUTTON_FONT size:30.0f]];
-    [backButton setTitleColor:BUTTON_FG forState:UIControlStateNormal];
-    [backButton setTitleColor:BUTTON_HIGHLIGHT forState:UIControlStateHighlighted];
-    [backButton addTarget:self action:@selector(insertNewObject:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
-}
-
-- (void)willMoveToParentViewController:(UIViewController *)parent {
-	[super willMoveToParentViewController:parent];
-}
-
-- (void)didMoveToParentViewController:(UIViewController *)parent {
-	[super didMoveToParentViewController:parent];
+    UIButton *addButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, FTB_SIZE - 6)];
+    [addButton setBackgroundColor:[UIColor clearColor]];
+    [addButton setTitle:@"+" forState:UIControlStateNormal];
+    [addButton.titleLabel setFont:[UIFont fontWithName:BUTTON_FONT size:30.0f]];
+    [addButton setTitleColor:BUTTON_FG forState:UIControlStateNormal];
+    [addButton setTitleColor:BUTTON_HIGHLIGHT forState:UIControlStateHighlighted];
+    [addButton addTarget:self action:@selector(insertNewObject:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addButton];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
 	return YES;
-}
-
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-	[super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
 }
 
 #pragma mark - Table View
@@ -75,26 +42,34 @@
 	return cell;
 }
 
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", self.title, [[object valueForKey:@"timeStamp"] description]];
+    cell.textLabel.font = [UIFont fontWithName:@"Open Sans" size:18];
+}
+
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-	ListViewController *listViewController1 = [[ListViewController alloc] initWithStyle:UITableViewStylePlain];
-	ListViewController *listViewController2 = [[ListViewController alloc] initWithStyle:UITableViewStylePlain];
+	ListView *ListView1 = [[ListView alloc] initWithStyle:UITableViewStylePlain];
+	ListView *ListView2 = [[ListView alloc] initWithStyle:UITableViewStylePlain];
 	
-	listViewController1.title = @"Another Tab 1";
-	listViewController2.title = @"Another Tab 2";
+	ListView1.title = @"Another Tab 1";
+	ListView2.title = @"Another Tab 2";
     
 	FlexibleTabBarController *tabBarController = [[FlexibleTabBarController alloc] init];
-	tabBarController.viewControllers = @[listViewController1, listViewController2];
+	tabBarController.viewControllers = @[ListView1, ListView2];
 	tabBarController.title = @"Modal Screen";
 	tabBarController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] 
 		initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
 
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:tabBarController];
-	navController.navigationBar.tintColor = [UIColor blackColor];
+    
 	[self presentViewController:navController animated:YES completion:nil];
 }
 
@@ -113,12 +88,20 @@
     [newManagedObject setValue:[NSDate date] forKey:@"timeStamp"];
     
     // Save the context.
+    [self saveContext];
+}
+
+- (void)saveContext
+{
     NSError *error = nil;
-    if (![context save:&error]) {
-        // Replace this implementation with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
+    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
+    if (managedObjectContext != nil) {
+        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
     }
 }
 
@@ -132,7 +115,7 @@
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     // Edit the entity name as appropriate.
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:self.managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
     
     // Set the batch size to a suitable number.
@@ -221,13 +204,6 @@
  }
  */
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
-{
-    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", self.title, [[object valueForKey:@"timeStamp"] description]];
-    cell.textLabel.font = [UIFont fontWithName:@"Open Sans" size:18];
-}
 
 
 @end

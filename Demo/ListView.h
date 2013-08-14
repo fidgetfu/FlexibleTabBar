@@ -1,5 +1,5 @@
 
-@interface CDListViewController : UITableViewController <NSFetchedResultsControllerDelegate>
+@interface ListView : UITableViewController <NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
