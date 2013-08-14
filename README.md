@@ -1,8 +1,8 @@
-# FlexibleTabBarController
+# FlexibleTabBar
 
 forked from MHTabBarController by Matthijs Hollemans
 
-This is a custom container view controller for iOS 5 that works just like a regular UITabBarController, except that there are a LOT more options. And! Best of all! You can put it anywhere!
+This is a custom container view controller for iOS 6 and beyond that works just like a regular UITabBarController, except that there are a LOT more options. And! Best of all! You can put it anywhere!
 
 Features:
 - universal support, separate settings for iPad and iPhone
