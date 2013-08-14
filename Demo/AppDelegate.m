@@ -9,61 +9,38 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
--(void)customiseAppearance {
-    // CUSTOMISE NAV BARS
-    [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init]
-                                       forBarMetrics:UIBarMetricsDefault];
-    
-    [[UINavigationBar appearance] setBackgroundColor:BUTTON_BG];
-    
-    [[UIToolbar appearance] setBackgroundImage:[UIImage alloc]
-                            forToolbarPosition:UIToolbarPositionAny
-                                    barMetrics:UIBarMetricsDefault];
-    
-    [[UIToolbar appearance] setBackgroundColor:BUTTON_BG];
-    
-    [[UINavigationBar appearance] setTitleTextAttributes:
-     [NSDictionary dictionaryWithObjectsAndKeys:
-      BUTTON_FG,
-      NSForegroundColorAttributeName,
-      [UIFont systemFontOfSize:22.0f],
-      NSFontAttributeName,
-      nil]];
-    
-}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    [self customiseAppearance];
+{   /*
+     * SETTING UP FLEXIBLE TAB BAR
+     * Here's how to use FlexibleTabBar with a few different views
+     */
     
-    // SET UP TAB BAR CONTROLLER
-    
-    // 1st view
+    // Create some views for it to manage
+    // 1st view - a basic code-only table view controller using core data
 	ListView *ListView1 = [[ListView alloc] initWithStyle:UITableViewStylePlain];
-    ListView1.managedObjectContext = self.managedObjectContext;
-    ListView1.title = @"rocket";
+    ListView1.title = @"coded view";
     UINavigationController * navigationController1 = [[UINavigationController alloc]
                                                      initWithRootViewController:ListView1];
-    // 2nd view
-	ListView *ListView2 = [[ListView alloc] initWithStyle:UITableViewStylePlain];
-    ListView2.title = @"clock";
-	ListView2.managedObjectContext = self.managedObjectContext;
+    // 2nd view - a storyboard defined view
+    UIStoryboard *viewStoryboard;
+    if (IS_IPAD) viewStoryboard = [UIStoryboard storyboardWithName:@"ipad" bundle:nil];
+    else viewStoryboard = [UIStoryboard storyboardWithName:@"iphone" bundle:nil];
+    UIViewController *viewController = [viewStoryboard instantiateViewControllerWithIdentifier:@"ViewController"];
+    viewController.title = @"storyboard";
     UINavigationController * navigationController2 = [[UINavigationController alloc]
-                                                     initWithRootViewController:ListView2];
-    
-    // 3rd 4th and 5th views
-	ListView *ListView3 = [[ListView alloc] initWithStyle:UITableViewStylePlain];
-    ListView3.title = @"tag";
+                                                      initWithRootViewController:viewController];
 
-	NSArray *viewControllers = @[navigationController1, navigationController2, ListView3];
-	FlexibleTabBarController *tabBarController = [[FlexibleTabBarController alloc] init];
+    // Set up the tab bar controller with those views
+	NSArray *viewControllers = @[navigationController1, navigationController2];
+	FlexibleTabBar *tabBarController = [[FlexibleTabBar alloc] init];
 
 	tabBarController.delegate = self;
 	tabBarController.viewControllers = viewControllers;
 
-	// Uncomment this to select "Tab 2".
+	// Can select a tab to be open by default like this:
 	//tabBarController.selectedIndex = 1;
-	// Uncomment this to select "Tab 3".
+	// OR like this:
 	//tabBarController.selectedViewController = ListView3;
 
     // CREATE THE WINDOW
@@ -73,14 +50,19 @@
 	return YES;
 }
 
-- (BOOL)flex_tabBarController:(FlexibleTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index {
+/* 
+    These are OPTIONAL
+    delegate methods.
+*/
+
+- (BOOL)flexTabBar:(FlexibleTabBar *)tabBarController shouldSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index {
 	
 	// Uncomment this to prevent "Tab 3" from being selected.
 	//return (index != 2);
 	return YES;
 }
 
-- (void)flex_tabBarController:(FlexibleTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index {
+- (void)flexTabBar:(FlexibleTabBar *)tabBarController didSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index {
 	
 }
 
@@ -91,16 +73,6 @@
 }
 
 # pragma mark - Core Data
-
-- (void)insertNewObject:(id)sender
-{
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:self.managedObjectContext];
-    NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:self.managedObjectContext];
-    
-    [newManagedObject setValue:[NSDate date] forKey:@"timeStamp"];
-    
-    [self saveContext];
-}
 
 - (void)saveContext
 {

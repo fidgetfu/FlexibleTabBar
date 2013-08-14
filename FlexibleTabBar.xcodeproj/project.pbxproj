@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		7B2C1D1E1683544700542AC1 /* FlexibleTabBarIndicator.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B2C1D181683544700542AC1 /* FlexibleTabBarIndicator.png */; };
 		7B2C1D1F1683544700542AC1 /* FlexibleTabBarIndicator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B2C1D191683544700542AC1 /* FlexibleTabBarIndicator@2x.png */; };
-		7B5C62CC168242E9005C3BD4 /* FlexibleTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C62CB168242E9005C3BD4 /* FlexibleTabBarController.m */; };
+		7B5C62CC168242E9005C3BD4 /* FlexibleTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C62CB168242E9005C3BD4 /* FlexibleTabBar.m */; };
 		7BCE96EF1469751600135C63 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE96EE1469751600135C63 /* UIKit.framework */; };
 		7BCE96F11469751600135C63 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE96F01469751600135C63 /* Foundation.framework */; };
 		7BCE96F31469751600135C63 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCE96F21469751600135C63 /* CoreGraphics.framework */; };
@@ -18,6 +18,8 @@
 		7BCE96FF1469751600135C63 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCE96FE1469751600135C63 /* AppDelegate.m */; };
 		E1573EAD17BB59D200D4AC18 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1573EAC17BB59D100D4AC18 /* Images.xcassets */; };
 		E1573EB017BB5B5300D4AC18 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1573EAE17BB5B5300D4AC18 /* DataModel.xcdatamodeld */; };
+		E1573EB217BB72B000D4AC18 /* iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1573EB117BB72B000D4AC18 /* iphone.storyboard */; };
+		E1573EB417BB72BF00D4AC18 /* ipad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1573EB317BB72BF00D4AC18 /* ipad.storyboard */; };
 		E1E51C15175F4393001D810D /* fontello.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E1E51C14175F437B001D810D /* fontello.ttf */; };
 		E1ED3B19175DDCF200AF2685 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1ED3B17175DDCD600AF2685 /* CoreData.framework */; };
 		E1FAFC1717BB510D00CCA2EB /* ListView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1FAFC1617BB510D00CCA2EB /* ListView.m */; };
@@ -26,8 +28,8 @@
 /* Begin PBXFileReference section */
 		7B2C1D181683544700542AC1 /* FlexibleTabBarIndicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FlexibleTabBarIndicator.png; path = MHTabBarController/FlexibleTabBarIndicator.png; sourceTree = SOURCE_ROOT; };
 		7B2C1D191683544700542AC1 /* FlexibleTabBarIndicator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "FlexibleTabBarIndicator@2x.png"; path = "MHTabBarController/FlexibleTabBarIndicator@2x.png"; sourceTree = SOURCE_ROOT; };
-		7B5C62CA168242E9005C3BD4 /* FlexibleTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = FlexibleTabBarController.h; path = MHTabBarController/FlexibleTabBarController.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		7B5C62CB168242E9005C3BD4 /* FlexibleTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = FlexibleTabBarController.m; path = MHTabBarController/FlexibleTabBarController.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		7B5C62CA168242E9005C3BD4 /* FlexibleTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = FlexibleTabBar.h; path = MHTabBarController/FlexibleTabBar.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		7B5C62CB168242E9005C3BD4 /* FlexibleTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = FlexibleTabBar.m; path = MHTabBarController/FlexibleTabBar.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		7BCE96EA1469751600135C63 /* FlexibleTabBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlexibleTabBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BCE96EE1469751600135C63 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7BCE96F01469751600135C63 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -40,6 +42,8 @@
 		7BCE96FE1469751600135C63 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E1573EAC17BB59D100D4AC18 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../FlexibleTabBar/Images.xcassets; sourceTree = "<group>"; };
 		E1573EAF17BB5B5300D4AC18 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		E1573EB117BB72B000D4AC18 /* iphone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iphone.storyboard; sourceTree = "<group>"; };
+		E1573EB317BB72BF00D4AC18 /* ipad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ipad.storyboard; sourceTree = "<group>"; };
 		E1A55989175F1659002201FF /* FTB-Settings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "FTB-Settings.h"; path = "MHTabBarController/FTB-Settings.h"; sourceTree = SOURCE_ROOT; };
 		E1E51C14175F437B001D810D /* fontello.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fontello.ttf; sourceTree = "<group>"; };
 		E1ED3B17175DDCD600AF2685 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -66,8 +70,8 @@
 			isa = PBXGroup;
 			children = (
 				E1A55989175F1659002201FF /* FTB-Settings.h */,
-				7B5C62CA168242E9005C3BD4 /* FlexibleTabBarController.h */,
-				7B5C62CB168242E9005C3BD4 /* FlexibleTabBarController.m */,
+				7B5C62CA168242E9005C3BD4 /* FlexibleTabBar.h */,
+				7B5C62CB168242E9005C3BD4 /* FlexibleTabBar.m */,
 				7B2C1D181683544700542AC1 /* FlexibleTabBarIndicator.png */,
 				7B2C1D191683544700542AC1 /* FlexibleTabBarIndicator@2x.png */,
 			);
@@ -115,6 +119,8 @@
 				E1FAFC1517BB510D00CCA2EB /* ListView.h */,
 				E1FAFC1617BB510D00CCA2EB /* ListView.m */,
 				7BCE96F51469751600135C63 /* Supporting Files */,
+				E1573EB117BB72B000D4AC18 /* iphone.storyboard */,
+				E1573EB317BB72BF00D4AC18 /* ipad.storyboard */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -189,6 +195,8 @@
 				E1E51C15175F4393001D810D /* fontello.ttf in Resources */,
 				7BCE96F91469751600135C63 /* InfoPlist.strings in Resources */,
 				7B2C1D1E1683544700542AC1 /* FlexibleTabBarIndicator.png in Resources */,
+				E1573EB417BB72BF00D4AC18 /* ipad.storyboard in Resources */,
+				E1573EB217BB72B000D4AC18 /* iphone.storyboard in Resources */,
 				E1573EAD17BB59D200D4AC18 /* Images.xcassets in Resources */,
 				7B2C1D1F1683544700542AC1 /* FlexibleTabBarIndicator@2x.png in Resources */,
 			);
@@ -204,7 +212,7 @@
 				7BCE96FB1469751600135C63 /* main.m in Sources */,
 				E1573EB017BB5B5300D4AC18 /* DataModel.xcdatamodeld in Sources */,
 				7BCE96FF1469751600135C63 /* AppDelegate.m in Sources */,
-				7B5C62CC168242E9005C3BD4 /* FlexibleTabBarController.m in Sources */,
+				7B5C62CC168242E9005C3BD4 /* FlexibleTabBar.m in Sources */,
 				E1FAFC1717BB510D00CCA2EB /* ListView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

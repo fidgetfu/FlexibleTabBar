@@ -20,18 +20,19 @@
  * THE SOFTWARE.
  */
 
-@protocol FlexibleTabBarControllerDelegate;
+@protocol FlexibleTabBarDelegate;
 
 /*
  * A custom tab bar container view controller. It works just like a regular
- * UITabBarController, except the tabs are at the top and look different.
+ * UITabBarController, except the tabs are very customisable.
  */
-@interface FlexibleTabBarController : UIViewController
+
+@interface FlexibleTabBar : UIViewController
 
 @property (nonatomic, copy) NSArray *viewControllers;
 @property (nonatomic, weak) UIViewController *selectedViewController;
 @property (nonatomic, assign) NSUInteger selectedIndex;
-@property (nonatomic, weak) id <FlexibleTabBarControllerDelegate> delegate;
+@property (nonatomic, weak) id <FlexibleTabBarDelegate> delegate;
 
 - (void)setSelectedIndex:(NSUInteger)index animated:(BOOL)animated;
 - (void)setSelectedViewController:(UIViewController *)viewController animated:(BOOL)animated;
@@ -39,10 +40,15 @@
 @end
 
 /*
- * The delegate protocol for FlexibleTabBarController.
+ * Delegate protocol for FlexibleTabBar.
  */
-@protocol FlexibleTabBarControllerDelegate <NSObject>
+
+@protocol FlexibleTabBarDelegate <NSObject>
+
 @optional
-- (BOOL)flex_tabBarController:(FlexibleTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index;
-- (void)flex_tabBarController:(FlexibleTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index;
+- (BOOL)flexTabBar:(FlexibleTabBar *)ftb shouldSelectViewController:(UIViewController *)viewController
+           atIndex:(NSUInteger)index;
+- (void)flexTabBar:(FlexibleTabBar *)ftb didSelectViewController:(UIViewController *)viewController
+           atIndex:(NSUInteger)index;
+
 @end

@@ -1,7 +1,7 @@
 
-#import "FlexibleTabBarController.h"
+#import "FlexibleTabBar.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, FlexibleTabBarControllerDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, FlexibleTabBarDelegate>
 
 @property (nonatomic, strong) UIWindow *window;
 

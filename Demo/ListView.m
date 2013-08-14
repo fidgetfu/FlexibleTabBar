@@ -1,12 +1,17 @@
 
 #import "ListView.h"
-#import "FlexibleTabBarController.h"
+#import "FlexibleTabBar.h"
 #import "FTB-Settings.h"
 
 @implementation ListView
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
+    id appDelegate = [[UIApplication sharedApplication] delegate];
+    self.managedObjectContext = [appDelegate managedObjectContext];
+    
 	[super viewDidLoad];
+    
     UIButton *addButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, FTB_SIZE - 6)];
     [addButton setBackgroundColor:[UIColor clearColor]];
     [addButton setTitle:@"+" forState:UIControlStateNormal];
@@ -47,7 +52,6 @@
     NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", self.title, [[object valueForKey:@"timeStamp"] description]];
-    cell.textLabel.font = [UIFont fontWithName:@"Open Sans" size:18];
 }
 
 #pragma mark - UITableViewDelegate
@@ -57,12 +61,12 @@
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 
 	ListView *ListView1 = [[ListView alloc] initWithStyle:UITableViewStylePlain];
+    ListView1.title = @"Another Tab 1";
+    
 	ListView *ListView2 = [[ListView alloc] initWithStyle:UITableViewStylePlain];
-	
-	ListView1.title = @"Another Tab 1";
 	ListView2.title = @"Another Tab 2";
     
-	FlexibleTabBarController *tabBarController = [[FlexibleTabBarController alloc] init];
+	FlexibleTabBar *tabBarController = [[FlexibleTabBar alloc] init];
 	tabBarController.viewControllers = @[ListView1, ListView2];
 	tabBarController.title = @"Modal Screen";
 	tabBarController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] 

@@ -20,12 +20,12 @@
  * THE SOFTWARE.
  */
 
-#import "FlexibleTabBarController.h"
+#import "FlexibleTabBar.h"
 #import "FTB-Settings.h"
 
 static const NSInteger TagOffset = 1000;
 
-@implementation FlexibleTabBarController {
+@implementation FlexibleTabBar {
 	UIView *tabButtonsContainerView;
 	UIView *contentContainerView;
 	UIImageView *indicatorImageView;
@@ -259,7 +259,7 @@ static const NSInteger TagOffset = 1000;
 # pragma mark - view controller organisation
 
 - (void)setViewControllers:(NSArray *)newViewControllers {
-	NSAssert([newViewControllers count] >= 2, @"FlexibleTabBarController requires at least two view controllers");
+	NSAssert([newViewControllers count] >= 2, @"FlexibleTabBar requires at least two view controllers");
     
 	UIViewController *oldSelectedViewController = self.selectedViewController;
     
@@ -303,7 +303,7 @@ static const NSInteger TagOffset = 1000;
 	if ([self.delegate respondsToSelector:@selector(flex_tabBarController:shouldSelectViewController:atIndex:)])
 	{
 		UIViewController *toViewController = (self.viewControllers)[newSelectedIndex];
-		if (![self.delegate flex_tabBarController:self shouldSelectViewController:toViewController atIndex:newSelectedIndex])
+		if (![self.delegate flexTabBar:self shouldSelectViewController:toViewController atIndex:newSelectedIndex])
 			return;
 	}
     
@@ -345,7 +345,7 @@ static const NSInteger TagOffset = 1000;
 			[self centerIndicatorOnButton:toButton];
             
 			if ([self.delegate respondsToSelector:@selector(flex_tabBarController:didSelectViewController:atIndex:)])
-				[self.delegate flex_tabBarController:self didSelectViewController:toViewController atIndex:newSelectedIndex];
+				[self.delegate flexTabBar:self didSelectViewController:toViewController atIndex:newSelectedIndex];
 		}
 		else if (animated) {
 			CGRect rect = contentContainerView.bounds;
@@ -392,7 +392,7 @@ static const NSInteger TagOffset = 1000;
                  tabButtonsContainerView.userInteractionEnabled = YES;
                  
                  if ([self.delegate respondsToSelector:@selector(flex_tabBarController:didSelectViewController:atIndex:)])
-                     [self.delegate flex_tabBarController:self didSelectViewController:toViewController atIndex:newSelectedIndex];
+                     [self.delegate flexTabBar:self didSelectViewController:toViewController atIndex:newSelectedIndex];
              }];
             
 		}
@@ -405,7 +405,7 @@ static const NSInteger TagOffset = 1000;
 			[self centerIndicatorOnButton:toButton];
             
 			if ([self.delegate respondsToSelector:@selector(flex_tabBarController:didSelectViewController:atIndex:)])
-				[self.delegate flex_tabBarController:self didSelectViewController:toViewController atIndex:newSelectedIndex];
+				[self.delegate flexTabBar:self didSelectViewController:toViewController atIndex:newSelectedIndex];
 		}
 	}
 }
