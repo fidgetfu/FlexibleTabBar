@@ -26,9 +26,10 @@
 #define     FTB_ORIENT_IPAD     @"bottom"
 #define     FTB_ANIMATED        NO
 
-#define     BUTTON_BG           [UIColor colorWithRed:0.69 green:0.75 blue:0.76 alpha:1.0]
-#define     BUTTON_HIGHLIGHT    [UIColor colorWithRed:0.82 green:0.90 blue:0.93 alpha:1.0]
-#define     BUTTON_FG           [UIColor colorWithRed:0.26 green:0.30 blue:0.31 alpha:1.0]
+#define     BUTTON_BG           [UIColor colorWithRed:0.93f green:0.93f blue:0.93f alpha:1.00f]
+#define     BUTTON_FG           [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f]
+#define     BUTTON_SELECT_FG    [UIColor colorWithRed:0.43f green:0.52f blue:0.36f alpha:1.00f]
+#define     BUTTON_SELECT_BG    [UIColor colorWithRed:0.73f green:0.88f blue:0.60f alpha:1.00f]
 #define     BUTTON_FONT         @"fontello"
 #define     BUTTON_FONT_SIZE    36.0f
 
