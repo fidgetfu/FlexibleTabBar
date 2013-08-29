@@ -26,7 +26,7 @@
     // Create some views for it to manage
     // 1st view - a basic code-only table view controller using core data
 	ListView *ListView1 = [[ListView alloc] initWithStyle:UITableViewStylePlain];
-    ListView1.title = @"coded view";
+    ListView1.title = TabName(0);
     UINavigationController * navigationController1 = [[UINavigationController alloc]
                                                       initWithRootViewController:ListView1];
     // 2nd view - a storyboard defined view
@@ -34,7 +34,7 @@
     if (IS_IPAD) viewStoryboard = [UIStoryboard storyboardWithName:@"ipad" bundle:nil];
     else viewStoryboard = [UIStoryboard storyboardWithName:@"iphone" bundle:nil];
     UIViewController *viewController = [viewStoryboard instantiateViewControllerWithIdentifier:@"ViewController"];
-    viewController.title = @"storyboard";
+    viewController.title = TabName(1);
     UINavigationController * navigationController2 = [[UINavigationController alloc]
                                                       initWithRootViewController:viewController];
     
@@ -47,7 +47,7 @@
     
 	// Can select a tab to be open by default like this:
 	//tabBarController.selectedIndex = 1;
-	// OR like this:
+    // or
 	//tabBarController.selectedViewController = ListView3;
     
     // CREATE THE WINDOW

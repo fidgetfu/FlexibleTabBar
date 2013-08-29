@@ -136,10 +136,12 @@ static const NSInteger TagOffset = 1000;
 	
 	tabButtonsContainerView = [[UIView alloc] initWithFrame:[self tabsRect]];
 	tabButtonsContainerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    tabButtonsContainerView.backgroundColor = BAR;
 	[self.view addSubview:tabButtonsContainerView];
     
 	contentContainerView = [[UIView alloc] initWithFrame:[self childViewRect]];
 	contentContainerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    contentContainerView.backgroundColor = [UIColor clearColor];
 	[self.view addSubview:contentContainerView];
     
 	indicatorImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"FlexibleTabBarIndicator"]];
@@ -171,9 +173,17 @@ static const NSInteger TagOffset = 1000;
             button.frame = rect;
             rect.origin.x += rect.size.width;
         } else {
-            if (index == count - 1) rect.size.height = self.view.bounds.size.height - rect.origin.y;
-            button.frame = rect;
-            rect.origin.y += rect.size.height;
+            if (FTB_SPREAD) {
+                if (index == count - 1) rect.size.height = self.view.bounds.size.height - rect.origin.y;
+                button.frame = rect;
+                rect.origin.y += rect.size.height;
+            } else { // dont spread the icons out
+                rect.size.height = FTB_TAB_SIZE;
+                if (index == count - 1) {
+                    rect.origin.y = self.view.bounds.size.height - FTB_TAB_SIZE;
+                } else rect.origin.y = rect.size.height * index;
+                button.frame = rect;
+            }
         }
         
 		if (index == self.selectedIndex)
@@ -222,12 +232,12 @@ static const NSInteger TagOffset = 1000;
 	{
 		UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
 		button.tag = TagOffset + index;
-		button.titleLabel.font = [UIFont fontWithName:BUTTON_FONT size:BUTTON_FONT_SIZE];
+		button.titleLabel.font = ButtonFont;
         
 		UIOffset offset = viewController.tabBarItem.titlePositionAdjustment;
 		button.titleEdgeInsets = UIEdgeInsetsMake(offset.vertical, offset.horizontal, 0.0f, 0.0f);
         
-        NSString *name = tabNameFromIndex(index);
+        NSString *name = TabSymbol(index);
         
 		[button setTitle:name forState:UIControlStateNormal];
         
@@ -242,18 +252,15 @@ static const NSInteger TagOffset = 1000;
 
 - (void)selectTabButton:(UIButton *)button {
     
-    [button setBackgroundColor: BUTTON_SELECT_BG];
+    [button setBackgroundColor:BUTTON_SELECT_BG];
 	[button setTitleColor:BUTTON_SELECT_FG forState:UIControlStateNormal];
-    
-    //	[button setTitleShadowColor:[UIColor colorWithWhite:0.0f alpha:0.5f] forState:UIControlStateNormal];
 }
 
 - (void)deselectTabButton:(UIButton *)button {
     
-    [button setBackgroundColor: BUTTON_BG];
+    [button setBackgroundColor:BUTTON_BG];
 	[button setTitleColor:BUTTON_FG forState:UIControlStateNormal];
     
-    //	[button setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
 }
 
 # pragma mark - view controller organisation

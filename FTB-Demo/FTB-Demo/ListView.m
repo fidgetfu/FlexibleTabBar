@@ -1,6 +1,5 @@
 
 #import "ListView.h"
-#import "FlexibleTabBar.h"
 #import "FTB-Settings.h"
 
 @implementation ListView
@@ -17,7 +16,7 @@
     [addButton setTitle:@"+" forState:UIControlStateNormal];
     [addButton.titleLabel setFont:[UIFont fontWithName:BUTTON_FONT size:30.0f]];
     [addButton setTitleColor:BUTTON_FG forState:UIControlStateNormal];
-    [addButton setTitleColor:BUTTON_HIGHLIGHT forState:UIControlStateHighlighted];
+    [addButton setTitleColor:BUTTON_SELECT_FG forState:UIControlStateHighlighted];
     [addButton addTarget:self action:@selector(insertNewObject:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addButton];
 }
@@ -55,27 +54,6 @@
 }
 
 #pragma mark - UITableViewDelegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
-	[tableView deselectRowAtIndexPath:indexPath animated:YES];
-
-	ListView *ListView1 = [[ListView alloc] initWithStyle:UITableViewStylePlain];
-    ListView1.title = @"Another Tab 1";
-    
-	ListView *ListView2 = [[ListView alloc] initWithStyle:UITableViewStylePlain];
-	ListView2.title = @"Another Tab 2";
-    
-	FlexibleTabBar *tabBarController = [[FlexibleTabBar alloc] init];
-	tabBarController.viewControllers = @[ListView1, ListView2];
-	tabBarController.title = @"Modal Screen";
-	tabBarController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] 
-		initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
-
-	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:tabBarController];
-    
-	[self presentViewController:navController animated:YES completion:nil];
-}
 
 - (IBAction)done:(id)sender {
 	[self dismissViewControllerAnimated:YES completion:nil];
