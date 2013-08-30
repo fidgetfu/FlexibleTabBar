@@ -21,7 +21,7 @@
  */
 
 #import "FlexibleTabBar.h"
-#import "FTB-Settings.h"
+#import "FTB-Settings-Old.h"
 
 static const NSInteger TagOffset = 1000;
 
@@ -84,14 +84,14 @@ static const NSInteger TagOffset = 1000;
     else orient = FTB_ORIENT_IPHONE;
     
     if (isTop(orient) || isBottom(orient)) {
-        height = FTB_SIZE;
+        height = FTB_BAR_SIZE;
         width = self.view.bounds.size.width;
         rectX = 0.0f;
         if (isTop(orient)) rectY = 0.0f;
         else rectY = self.view.bounds.size.height - height;
     } else {
         height = self.view.bounds.size.height;
-        width = FTB_SIZE;
+        width = FTB_BAR_SIZE;
         rectY = 0.0f;
         if (isLeft(orient)) rectX = 0.0f;
         else rectX = self.view.bounds.size.width - width;
@@ -109,16 +109,16 @@ static const NSInteger TagOffset = 1000;
     else orient = FTB_ORIENT_IPHONE;
     
     if (isTop(orient) || isBottom(orient)) {
-        height = self.view.bounds.size.height - FTB_SIZE;
+        height = self.view.bounds.size.height - FTB_BAR_SIZE;
         width = self.view.bounds.size.width;
         rectX = 0.0f;
-        if (isTop(orient)) rectY = FTB_SIZE;
+        if (isTop(orient)) rectY = FTB_BAR_SIZE;
         else rectY = 0.0f;
     } else {
         height = self.view.bounds.size.height;
-        width = self.view.bounds.size.width - FTB_SIZE;
+        width = self.view.bounds.size.width - FTB_BAR_SIZE;
         rectY = 0.0f;
-        if (isLeft(orient)) rectX = FTB_SIZE;
+        if (isLeft(orient)) rectX = FTB_BAR_SIZE;
         else rectX = 0.0f;
     }
     
@@ -136,7 +136,7 @@ static const NSInteger TagOffset = 1000;
 	
 	tabButtonsContainerView = [[UIView alloc] initWithFrame:[self tabsRect]];
 	tabButtonsContainerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    tabButtonsContainerView.backgroundColor = BAR;
+    tabButtonsContainerView.backgroundColor = BAR_BG;
 	[self.view addSubview:tabButtonsContainerView];
     
 	contentContainerView = [[UIView alloc] initWithFrame:[self childViewRect]];
@@ -160,8 +160,8 @@ static const NSInteger TagOffset = 1000;
     
     CGRect tabBarRect = [self tabsRect];
     CGRect rect;
-    if (isTop(orient) || isBottom(orient)) rect = CGRectMake(0.0f, 0.0f, floorf(tabBarRect.size.width / count), FTB_SIZE);
-    else rect = CGRectMake(0.0f, 0.0f, FTB_SIZE, floorf(tabBarRect.size.height / count));
+    if (isTop(orient) || isBottom(orient)) rect = CGRectMake(0.0f, 0.0f, floorf(tabBarRect.size.width / count), FTB_BAR_SIZE);
+    else rect = CGRectMake(0.0f, 0.0f, FTB_BAR_SIZE, floorf(tabBarRect.size.height / count));
     
 	indicatorImageView.hidden = YES;
     
@@ -202,19 +202,19 @@ static const NSInteger TagOffset = 1000;
     if (isTop(orient) || isBottom(orient)) {
         rect.origin.x = button.center.x - floorf(indicatorImageView.frame.size.width/2.0f);
         if (isBottom(orient)) {
-            rect.origin.y = self.view.bounds.size.height - FTB_SIZE;
+            rect.origin.y = self.view.bounds.size.height - FTB_BAR_SIZE;
             indicatorImageView.transform = CGAffineTransformMakeRotation(M_PI);
         } else {
-            rect.origin.y = FTB_SIZE - indicatorImageView.frame.size.height;
+            rect.origin.y = FTB_BAR_SIZE - indicatorImageView.frame.size.height;
         }
         
     } else {
         rect.origin.y = button.center.y - floorf(indicatorImageView.frame.size.height/2.0f);
         if (isLeft(orient)) {
-            rect.origin.x = FTB_SIZE - indicatorImageView.frame.size.width;
+            rect.origin.x = FTB_BAR_SIZE - indicatorImageView.frame.size.width;
             indicatorImageView.transform = CGAffineTransformMakeRotation(-M_PI_2);
         } else {
-            rect.origin.x = self.view.bounds.size.width - FTB_SIZE;
+            rect.origin.x = self.view.bounds.size.width - FTB_BAR_SIZE;
             indicatorImageView.transform = CGAffineTransformMakeRotation(M_PI_2);
         }
         
@@ -252,14 +252,14 @@ static const NSInteger TagOffset = 1000;
 
 - (void)selectTabButton:(UIButton *)button {
     
-    [button setBackgroundColor:BUTTON_SELECT_BG];
-	[button setTitleColor:BUTTON_SELECT_FG forState:UIControlStateNormal];
+    [button setBackgroundColor:TAB_SELECTED_BG];
+	[button setTitleColor:TAB_SELECTED_FG forState:UIControlStateNormal];
 }
 
 - (void)deselectTabButton:(UIButton *)button {
     
-    [button setBackgroundColor:BUTTON_BG];
-	[button setTitleColor:BUTTON_FG forState:UIControlStateNormal];
+    [button setBackgroundColor:TAB_BG];
+	[button setTitleColor:TAB_FG forState:UIControlStateNormal];
     
 }
 
@@ -364,11 +364,11 @@ static const NSInteger TagOffset = 1000;
 			if (oldSelectedIndex < newSelectedIndex) {
                 // going right to left
 				if (isTop(orient) || isBottom(orient)) rect.origin.x = rect.size.width;
-                if (isLeft(orient)) rect.origin.x = rect.size.width - FTB_SIZE;
+                if (isLeft(orient)) rect.origin.x = rect.size.width - FTB_BAR_SIZE;
             } else {
                 // going left to right
 				if (isTop(orient) || isBottom(orient)) rect.origin.x = -rect.size.width;
-                if (isLeft(orient)) rect.origin.x = - rect.size.width - FTB_SIZE;
+                if (isLeft(orient)) rect.origin.x = - rect.size.width - FTB_BAR_SIZE;
             }
             
 			toViewController.view.frame = rect;
@@ -384,10 +384,10 @@ static const NSInteger TagOffset = 1000;
                  
                  if (oldSelectedIndex < newSelectedIndex) {
                      if (isTop(orient) || isBottom(orient)) rect.origin.x = -rect.size.width;
-                     if (isLeft(orient)) rect.origin.x = - rect.size.width - FTB_SIZE;
+                     if (isLeft(orient)) rect.origin.x = - rect.size.width - FTB_BAR_SIZE;
                  } else {
                      if (isTop(orient) || isBottom(orient)) rect.origin.x = rect.size.width;
-                     if (isLeft(orient)) rect.origin.x = rect.size.width - FTB_SIZE;
+                     if (isLeft(orient)) rect.origin.x = rect.size.width - FTB_BAR_SIZE;
                  }
                  
                  fromViewController.view.frame = rect;

@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Amy Nugent. All rights reserved.
 //
 
-#import "FlexibleTabBar.h"
+#import "ExtraView.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, FlexibleTabBarDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, ExtraViewDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

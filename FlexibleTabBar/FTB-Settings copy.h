@@ -33,8 +33,8 @@ typedef enum FTBStyleType : NSUInteger {
 #define     FTB_SIZE            44.0f
 #define     FTB_TAB_SIZE        44.0f
 
-#define     FTB_IPHONE_ORIENT   orientLeft // top, left, right, bottom
-#define     FTB_IPAD_ORIENT     orientRight
+#define     FTB_IPHONE_ORIENT   orientBottom // top, left, right, bottom
+#define     FTB_IPAD_ORIENT     orientBottom
 #define     FTB_STYLE           ftbStyleSpread // grouped, spaced, spread
 
 #define     BUTTON_FONT_NAME    @"ftb"
@@ -45,7 +45,7 @@ typedef enum FTBStyleType : NSUInteger {
 #define     BUTTON_FG           [UIColor colorWithRed:0.10f green:0.16f blue:0.42f alpha:1.00f]
 #define     BUTTON_BG           [UIColor colorWithRed:0.16f green:0.25f blue:0.64f alpha:1.00f]
 #define     BAR                 [UIColor colorWithRed:1.00f green:1.00f blue:1.00f alpha:1.00f]
-#define     DIVIDER             [UIColor darGrayColor]
+#define     DIVIDER             BUTTON_BG // Make it the same as buttonBG to hide
 
 // deprecated in next update - don't want any animation in the new library
 #define     FTB_ANIMATED        NO

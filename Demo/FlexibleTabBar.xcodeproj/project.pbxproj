@@ -65,12 +65,13 @@
 		E1AF1A0417CF1D250014C147 /* FlexibleTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlexibleTabBar.m; sourceTree = "<group>"; };
 		E1AF1A0517CF1D250014C147 /* FlexibleTabBarIndicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FlexibleTabBarIndicator.png; sourceTree = "<group>"; };
 		E1AF1A0617CF1D250014C147 /* FlexibleTabBarIndicator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FlexibleTabBarIndicator@2x.png"; sourceTree = "<group>"; };
-		E1AF1A0717CF1D250014C147 /* FTB-Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FTB-Settings.h"; sourceTree = "<group>"; };
+		E1AF1A0717CF1D250014C147 /* FTB-Settings-Old.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FTB-Settings-Old.h"; sourceTree = "<group>"; };
 		E1AF1A0B17CF1DC80014C147 /* ftb.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ftb.ttf; sourceTree = "<group>"; };
 		E1AF1A0D17CF28300014C147 /* ExtraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtraView.h; sourceTree = "<group>"; };
 		E1AF1A0E17CF28300014C147 /* ExtraView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtraView.m; sourceTree = "<group>"; };
 		E1AF1A1017CF39860014C147 /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
 		E1AF1A1117CF39860014C147 /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
+		E1D5908D17D08D3B0090C76D /* FTB-Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FTB-Settings.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +139,7 @@
 				E1AF19FD17CF1C460014C147 /* Resources */,
 				E147F5A917CF19DD00A4E07F /* ListView.h */,
 				E147F5AA17CF19DD00A4E07F /* ListView.m */,
+				E1D5908D17D08D3B0090C76D /* FTB-Settings.h */,
 				E1AF1A0D17CF28300014C147 /* ExtraView.h */,
 				E1AF1A0E17CF28300014C147 /* ExtraView.m */,
 				E147F58117CF170000A4E07F /* Supporting Files */,
@@ -188,7 +190,7 @@
 		E1AF1A0217CF1D250014C147 /* FlexibleTabBar */ = {
 			isa = PBXGroup;
 			children = (
-				E1AF1A0717CF1D250014C147 /* FTB-Settings.h */,
+				E1AF1A0717CF1D250014C147 /* FTB-Settings-Old.h */,
 				E1AF1A0317CF1D250014C147 /* FlexibleTabBar.h */,
 				E1AF1A0417CF1D250014C147 /* FlexibleTabBar.m */,
 				E1AF1A0517CF1D250014C147 /* FlexibleTabBarIndicator.png */,
@@ -245,6 +247,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Amy Nugent";
 				TargetAttributes = {
+					E147F57617CF170000A4E07F = {
+						DevelopmentTeam = 995A793Y3S;
+					};
 					E147F59117CF170100A4E07F = {
 						TestTargetID = E147F57617CF170000A4E07F;
 					};
@@ -420,6 +425,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FlexibleTabBar/FlexibleTabBar-Prefix.pch";
 				INFOPLIST_FILE = "FlexibleTabBar/FlexibleTabBar-Info.plist";
@@ -433,6 +439,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FlexibleTabBar/FlexibleTabBar-Prefix.pch";
 				INFOPLIST_FILE = "FlexibleTabBar/FlexibleTabBar-Info.plist";

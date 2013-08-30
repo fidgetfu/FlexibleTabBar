@@ -19,7 +19,7 @@
     /*
      * SETTING UP FLEXIBLE TAB BAR
      * Here's how to use FlexibleTabBar with a few different views
-     */
+     
     
     // Create some views for it to manage
     // 1st view - a basic code-only table view controller
@@ -53,28 +53,16 @@
 	tabBarController.selectedIndex = 2;
     // or
 	//tabBarController.selectedViewController = ListView3;
+     
+     */
+    
+    ExtraView *tabBarController = [[ExtraView alloc] init];
     
     // CREATE THE WINDOW
 	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	self.window.rootViewController = tabBarController;
 	[self.window makeKeyAndVisible];
 	return YES;
-}
-
-/*
- These are OPTIONAL
- delegate methods.
- */
-
-- (BOOL)flexTabBar:(FlexibleTabBar *)tabBarController shouldSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index {
-	
-	// Uncomment this to prevent "Tab 3" from being selected.
-	//return (index != 2);
-	return YES;
-}
-
-- (void)flexTabBar:(FlexibleTabBar *)tabBarController didSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index {
-	
 }
 
 @end
