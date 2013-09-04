@@ -14,8 +14,8 @@
  *  Edit these settings to get FTB to fit the look of your app
  */
 
-#define     TAB_NAMES          @[@"UITableView", @"Storyboard", @"UIView"]
-#define     TAB_SYMBOLS        @[@"!", @"#", @"$"]
+#define     TAB_NAMES          @[@"UITableView", @"Storyboard"]
+#define     TAB_SYMBOLS        @[@"!", @"#"]
 
 #define     FTB_ORIENT_IPHONE  orientBottom // top, left, right, bottom
 #define     FTB_ORIENT_IPAD    orientBottom
@@ -64,6 +64,5 @@ typedef enum FTBStyleType : NSUInteger {
 #define TabName(a)     [TAB_NAMES objectAtIndex:a];
 #define TabSymbol(a)   [TAB_SYMBOLS objectAtIndex:a];
 #define ButtonFont     [UIFont fontWithName:TAB_FONT_NAME size:TAB_FONT_SIZE]
-#define FtbMetrics     @{@"pixel":@1.0, @"pixRetina":@0.5, @"barHeight":@FTB_BAR_SIZE, @"tabWidth":@FTB_TAB_SIZE}
 
 #endif

@@ -19,6 +19,7 @@ static const NSInteger TagOffset = 1000;
 @implementation ExtraView {
     UIView *tabBar;
 	UIView *contentContainer;
+    NSDictionary *metrics;
 }
 
 - (void)viewDidLoad
@@ -54,9 +55,12 @@ static const NSInteger TagOffset = 1000;
     contentContainer.backgroundColor = [UIColor clearColor];
     [self.view addSubview:contentContainer];
     
+    // set metrics based on display type
+    if (IS_RETINA) metrics = @{@"pixel":@0.5, @"barHeight":@FTB_BAR_SIZE, @"tabWidth":@FTB_TAB_SIZE};
+    else metrics = @{@"pixel":@1.0, @"barHeight":@FTB_BAR_SIZE, @"tabWidth":@FTB_TAB_SIZE};
+
     // CONSTRAINTS
-    
-    NSDictionary* views = NSDictionaryOfVariableBindings(tabBar,divider);
+    NSDictionary* views = NSDictionaryOfVariableBindings(tabBar,divider,contentContainer);
     
     FTBOrientType orient = [self getOrient];
     
@@ -64,35 +68,37 @@ static const NSInteger TagOffset = 1000;
         case orientTop:
             [self.view addVisualConstraints:@"|[tabBar]|" forViews:views];
             [self.view addVisualConstraints:@"|[divider]|" forViews:views];
-            [self.view addVisualConstraints:@"V:|[divider][tabBar(barHeight)]" forViews:views withMetrics:FtbMetrics];
+            [self.view addVisualConstraints:@"|[contentContainer]|" forViews:views];
+            [self.view addVisualConstraints:@"V:|[tabBar(==barHeight)][divider]" forViews:views withMetrics:metrics];
+            [self.view addVisualConstraints:@"V:[divider][contentContainer]|" forViews:views];
             break;
             
         case orientBottom:
             [self.view addVisualConstraints:@"|[tabBar]|" forViews:views];
             [self.view addVisualConstraints:@"|[divider]|" forViews:views];
-            [self.view addVisualConstraints:@"V:[tabBar(barHeight)][divider]|" forViews:views withMetrics:FtbMetrics];
+            [self.view addVisualConstraints:@"|[contentContainer]|" forViews:views];
+            [self.view addVisualConstraints:@"V:[divider][tabBar(==barHeight)]|" forViews:views withMetrics:metrics];
+            [self.view addVisualConstraints:@"V:|[contentContainer][divider(==pixel)]" forViews:views withMetrics:metrics];
             break;
             
         case orientLeft:
             [self.view addVisualConstraints:@"V:|[tabBar]|" forViews:views];
             [self.view addVisualConstraints:@"V:|[divider]|" forViews:views];
-            [self.view addVisualConstraints:@"|[tabBar(barHeight)][divider]" forViews:views withMetrics:FtbMetrics];
+            [self.view addVisualConstraints:@"V:|[contentContainer]|" forViews:views];
+            [self.view addVisualConstraints:@"|[tabBar(==barHeight)][divider]" forViews:views withMetrics:metrics];
+            [self.view addVisualConstraints:@"[divider][contentContainer]|" forViews:views];
             break;
             
         case orientRight:
             [self.view addVisualConstraints:@"V:|[tabBar]|" forViews:views];
             [self.view addVisualConstraints:@"V:|[divider]|" forViews:views];
-            [self.view addVisualConstraints:@"[divider][tabBar(barHeight)]|" forViews:views withMetrics:FtbMetrics];
+            [self.view addVisualConstraints:@"V:|[contentContainer]|" forViews:views];
+            [self.view addVisualConstraints:@"[divider][tabBar(==barHeight)]|" forViews:views withMetrics:metrics];
+            [self.view addVisualConstraints:@"|[contentContainer][divider]" forViews:views];
             break;
     }
-    
-    if (IS_RETINA) {
-        [self.view addVisualConstraints:@"[divider(pixRetina)]" forViews:views withMetrics:FtbMetrics];
-    } else {
-        [self.view addVisualConstraints:@"[divider(pixel)]" forViews:views withMetrics:FtbMetrics];
-    }
 
-    [self addTabButtons];
+    [self reloadTabButtons];
 }
 
 #pragma mark - Drawing
@@ -106,12 +112,10 @@ static const NSInteger TagOffset = 1000;
 
 - (void)addTabButtons {
     
-    NSAssert([self.viewControllers count] != [TAB_NAMES count], @"FlexibleTabBar needs an equal number of tab names and view controllers!");
-    
     NSMutableArray* tabs = [NSMutableArray array];
     
     // Create the tabs
-    [TAB_NAMES enumerateObjectsUsingBlock:^(NSString* tabName, NSUInteger idx, BOOL *stop) {
+    [self.viewControllers enumerateObjectsUsingBlock:^(UIViewController* aView, NSUInteger idx, BOOL *stop) {
         // create the tab bar
         UIView* tab = [UIView new];
         tab.translatesAutoresizingMaskIntoConstraints = NO;
@@ -134,6 +138,7 @@ static const NSInteger TagOffset = 1000;
         [tab addEqualityConstraintOn:NSLayoutAttributeCenterY forSubview:label];
         
         // add the view to the tab bar
+        [self deselectTabButton:tab];
         [tabBar addSubview:tab];
         [tabs addObject:tab];
     }];
@@ -158,13 +163,13 @@ static const NSInteger TagOffset = 1000;
                     NSDictionary *tabviews = NSDictionaryOfVariableBindings(tab, prevTab);
                     if (i == tabs.count - 1) {
                         // rightmost tab
-                        if (IS_RETINA) [tabBar addVisualConstraints:@"V:[prevTab]-pixRetina-[tab(==prevTab)]|" forViews:tabviews withMetrics:FtbMetrics];
-                        else [tabBar addVisualConstraints:@"V:[prevTab]-pixel-[tab(==prevTab)]|" forViews:tabviews withMetrics:FtbMetrics];
+                        if (IS_RETINA) [tabBar addVisualConstraints:@"V:[prevTab]-pixel-[tab(==prevTab)]|" forViews:tabviews withMetrics:metrics];
+                        else [tabBar addVisualConstraints:@"V:[prevTab]-pixel-[tab(==prevTab)]|" forViews:tabviews withMetrics:metrics];
                         
                     } else {
                         // other tabs
-                        if (IS_RETINA) [tabBar addVisualConstraints:@"V:[prevTab]-pixRetina-[tab(==prevTab)]" forViews:tabviews withMetrics:FtbMetrics];
-                        else [tabBar addVisualConstraints:@"V:[prevTab]-pixel-[tab(==prevTab)]" forViews:tabviews withMetrics:FtbMetrics];
+                        if (IS_RETINA) [tabBar addVisualConstraints:@"V:[prevTab]-pixel-[tab(==prevTab)]" forViews:tabviews withMetrics:metrics];
+                        else [tabBar addVisualConstraints:@"V:[prevTab]-pixel-[tab(==prevTab)]" forViews:tabviews withMetrics:metrics];
                     }
                     [tabBar addVisualConstraints:@"|[tab]|" forViews:tabviews];
                 }
@@ -182,13 +187,13 @@ static const NSInteger TagOffset = 1000;
                     NSDictionary *tabviews = NSDictionaryOfVariableBindings(tab, prevTab);
                     if (i == tabs.count - 1) {
                         // rightmost tab
-                        if (IS_RETINA) [tabBar addVisualConstraints:@"[prevTab]-pixRetina-[tab(==prevTab)]|" forViews:tabviews withMetrics:FtbMetrics];
-                        else [tabBar addVisualConstraints:@"[prevTab]-pixel-[tab(==prevTab)]|" forViews:tabviews withMetrics:FtbMetrics];
+                        if (IS_RETINA) [tabBar addVisualConstraints:@"[prevTab]-pixel-[tab(==prevTab)]|" forViews:tabviews withMetrics:metrics];
+                        else [tabBar addVisualConstraints:@"[prevTab]-pixel-[tab(==prevTab)]|" forViews:tabviews withMetrics:metrics];
                         
                     } else {
                         // other tabs
-                        if (IS_RETINA) [tabBar addVisualConstraints:@"[prevTab]-pixRetina-[tab(==prevTab)]" forViews:tabviews withMetrics:FtbMetrics];
-                        else [tabBar addVisualConstraints:@"[prevTab]-pixel-[tab(==prevTab)]" forViews:tabviews withMetrics:FtbMetrics];
+                        if (IS_RETINA) [tabBar addVisualConstraints:@"[prevTab]-pixel-[tab(==prevTab)]" forViews:tabviews withMetrics:metrics];
+                        else [tabBar addVisualConstraints:@"[prevTab]-pixel-[tab(==prevTab)]" forViews:tabviews withMetrics:metrics];
                     }
                     [tabBar addVisualConstraints:@"V:|[tab]|" forViews:tabviews];
                 }
@@ -199,27 +204,8 @@ static const NSInteger TagOffset = 1000;
     }
     
     /*
-	NSUInteger index = 0;
-	for (UIViewController *viewController in self.viewControllers)
-	{
-		UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-		button.tag = TagOffset + index;
-		button.titleLabel.font = ButtonFont;
-        
-		UIOffset offset = viewController.tabBarItem.titlePositionAdjustment;
-		button.titleEdgeInsets = UIEdgeInsetsMake(offset.vertical, offset.horizontal, 0.0f, 0.0f);
-        
-        NSString *name = TabSymbol(index);
-        
-		[button setTitle:name forState:UIControlStateNormal];
-        
-		[button addTarget:self action:@selector(tabButtonPressed:) forControlEvents:UIControlEventTouchDown];
         
 		[self deselectTabButton:button];
-		[tabBar addSubview:button];
-        
-		++index;
-	}
      */
 }
 
@@ -240,15 +226,15 @@ static const NSInteger TagOffset = 1000;
 }
 
 
-- (void)selectTabButton:(UIButton *)button {
+- (void)selectTabButton:(UIView *)tab {
     
-    [button setBackgroundColor:TAB_SELECTED_BG];
+    [tab setBackgroundColor:TAB_SELECTED_BG];
 	//[button setTitleColor:TAB_SELECTED_FG forState:UIControlStateNormal];
 }
 
-- (void)deselectTabButton:(UIButton *)button {
+- (void)deselectTabButton:(UIView *)tab {
     
-    [button setBackgroundColor:TAB_BG];
+    [tab setBackgroundColor:TAB_BG];
 	//[button setTitleColor:TAB_FG forState:UIControlStateNormal];
     
 }
@@ -329,17 +315,17 @@ static const NSInteger TagOffset = 1000;
         
 		if (_selectedIndex != NSNotFound)
 		{
-			UIButton *fromButton = (UIButton *)[tabBar viewWithTag:TagOffset + _selectedIndex];
+			UIView *fromButton = (UIView *)[tabBar viewWithTag:TagOffset + _selectedIndex];
 			[self deselectTabButton:fromButton];
 			fromViewController = self.selectedViewController;
 		}
         
 		_selectedIndex = newSelectedIndex;
         
-		UIButton *toButton;
+		UIView *toButton;
 		if (_selectedIndex != NSNotFound)
 		{
-			toButton = (UIButton *)[tabBar viewWithTag:TagOffset + _selectedIndex];
+			toButton = (UIView *)[tabBar viewWithTag:TagOffset + _selectedIndex];
 			[self selectTabButton:toButton];
 			toViewController = self.selectedViewController;
 		}

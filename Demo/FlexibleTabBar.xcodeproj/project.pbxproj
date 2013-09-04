@@ -41,7 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E147F57717CF170000A4E07F /* FlexibleTabBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlexibleTabBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E147F57717CF170000A4E07F /* FTB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FTB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E147F57A17CF170000A4E07F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E147F57C17CF170000A4E07F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		E147F57E17CF170000A4E07F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -113,7 +113,7 @@
 		E147F57817CF170000A4E07F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E147F57717CF170000A4E07F /* FlexibleTabBar.app */,
+				E147F57717CF170000A4E07F /* FTB.app */,
 				E147F59217CF170100A4E07F /* FlexibleTabBarTests.xctest */,
 			);
 			name = Products;
@@ -217,7 +217,7 @@
 			);
 			name = FlexibleTabBar;
 			productName = FlexibleTabBar;
-			productReference = E147F57717CF170000A4E07F /* FlexibleTabBar.app */;
+			productReference = E147F57717CF170000A4E07F /* FTB.app */;
 			productType = "com.apple.product-type.application";
 		};
 		E147F59117CF170100A4E07F /* FlexibleTabBarTests */ = {
@@ -429,7 +429,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FlexibleTabBar/FlexibleTabBar-Prefix.pch";
 				INFOPLIST_FILE = "FlexibleTabBar/FlexibleTabBar-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = FTB;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -443,7 +443,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FlexibleTabBar/FlexibleTabBar-Prefix.pch";
 				INFOPLIST_FILE = "FlexibleTabBar/FlexibleTabBar-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = FTB;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
