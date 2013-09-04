@@ -78,7 +78,7 @@ static const NSInteger TagOffset = 1000;
             [self.view addVisualConstraints:@"|[divider]|" forViews:views];
             [self.view addVisualConstraints:@"|[contentContainer]|" forViews:views];
             [self.view addVisualConstraints:@"V:[divider][tabBar(==barHeight)]|" forViews:views withMetrics:metrics];
-            [self.view addVisualConstraints:@"V:|[contentContainer][divider(==pixel)]" forViews:views];
+            [self.view addVisualConstraints:@"V:|[contentContainer][divider(==pixel)]" forViews:views withMetrics:metrics];
             break;
             
         case orientLeft:
@@ -98,7 +98,7 @@ static const NSInteger TagOffset = 1000;
             break;
     }
 
-    [self addTabButtons];
+    [self reloadTabButtons];
 }
 
 #pragma mark - Drawing
