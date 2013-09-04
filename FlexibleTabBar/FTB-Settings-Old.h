@@ -33,8 +33,8 @@ typedef enum FTBStyleType : NSUInteger {
 #define     FTB_BAR_SIZE            44.0f
 #define     FTB_TAB_SIZE        44.0f
 
-#define     FTB_ORIENT_IPHONE   orientBottom // top, left, right, bottom
-#define     FTB_ORIENT_IPAD     orientBottom
+#define     FTB_ORIENT_IPHONE   @"bottom" // top, left, right, bottom
+#define     FTB_ORIENT_IPAD     @"bottom"
 #define     FTB_STYLE           ftbStyleSpread // grouped, spaced, spread
 
 #define     TAB_FONT_NAME    @"ftb"
@@ -52,8 +52,6 @@ typedef enum FTBStyleType : NSUInteger {
 // deprecated in next update - using FTB_STYLE instead
 #define     FTB_SPREAD          NO
 // replaced with new ENUM type declaration
-#define     FTB_ORIENT_IPHONE   @"bottom" // top, left, right, bottom
-#define     FTB_ORIENT_IPAD     @"bottom"
 
 /*
  * MACROS

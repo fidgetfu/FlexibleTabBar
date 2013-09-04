@@ -18,7 +18,6 @@
 - (void)setSelectedIndex:(NSUInteger)index;
 - (void)setSelectedViewController:(UIViewController *)viewController;
 
-
 @end
 
 /*
