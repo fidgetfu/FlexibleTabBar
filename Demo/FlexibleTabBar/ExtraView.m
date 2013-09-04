@@ -52,7 +52,7 @@ static const NSInteger TagOffset = 1000;
     
     contentContainer = [[UIView alloc] init];
     contentContainer.translatesAutoresizingMaskIntoConstraints = NO;
-    contentContainer.backgroundColor = [UIColor blueColor];
+    contentContainer.backgroundColor = [UIColor clearColor];
     [self.view addSubview:contentContainer];
     
     // set metrics based on display type
