@@ -14,29 +14,32 @@
  *  Edit these settings to get FTB to fit the look of your app
  */
 
-#define     FTB_STYLE          ftbStyleGrouped // grouped, spread
-
 #define     TAB_NAMES          @[@"UITableView A", @"UITableView B", @"Storyboard"]
-#define     TAB_SYMBOLS        @[@"!", @"#", @"$"]
+#define     TAB_SYMBOLS        @[@"!", @"#", @"$"] // will be used as the tab label
 
-#define     TAB_FONT_NAME      @"ftb"
-#define     TAB_FONT_SIZE      36.0f
+#define     TAB_FONT_NAME      @"ftb" // recommend using a symbol font
+#define     TAB_FONT_SIZE      36.0f // like Fontello
 
-#define     FTB_BAR_SIZE       60.0f
-#define     FTB_TAB_SIZE       65.0f
+// set some sizes and bar options
+// for iPad and iPhone individually
 
-#define     FTB_ORIENT_IPHONE  orientLeft // top, left, right, bottom
-#define     FTB_ORIENT_IPAD    orientLeft
+#define     FTB_BAR_SIZE_IPAD       60.0f
+#define     FTB_TAB_SIZE_IPAD       65.0f
 
+#define     FTB_BAR_SIZE_IPHONE       44.0f
+#define     FTB_TAB_SIZE_IPHONE       56.0f
 
-// color for the selected tab
+#define     FTB_ORIENT_IPAD    orientLeft // top, left, right, bottom
+#define     FTB_ORIENT_IPHONE  orientBottom
+
+#define     FTB_STYLE_IPAD     ftbStyleGrouped // grouped, spread
+#define     FTB_STYLE_IPHONE   ftbStyleSpread
+
+// set some colors for the tabs and bar
 #define     TAB_SELECTED_FG    [UIColor colorWithRed:0.00f green:0.53f blue:0.61f alpha:1.00f]
 #define     TAB_SELECTED_BG    [UIColor colorWithRed:0.49f green:0.83f blue:0.88f alpha:1.00f]
-// unselected tabs (this is always the unselected color)
 #define     TAB_FG             [UIColor colorWithRed:0.58f green:0.70f blue:0.71f alpha:1.00f]
 #define     TAB_BG             [UIColor colorWithRed:0.79f green:0.87f blue:0.89f alpha:1.00f]
-// BAR_BG shows as divider between tabs or as background,
-// depending on how you choose to layout the bar
 #define     BAR_BG             [UIColor colorWithRed:0.56f green:0.65f blue:0.67f alpha:1.00f]
 
 /*

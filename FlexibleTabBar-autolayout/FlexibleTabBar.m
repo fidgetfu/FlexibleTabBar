@@ -53,8 +53,13 @@ static const NSInteger TagOffset = 1000;
     [self.view addSubview:contentContainer];
     
     // set metrics based on display type
-    if (IS_RETINA) metrics = @{@"pixel":@0.5, @"barHeight":@FTB_BAR_SIZE, @"tabWidth":@FTB_TAB_SIZE,@"statusBarHeight":@20.0};
-    else metrics = @{@"pixel":@1.0, @"barHeight":@FTB_BAR_SIZE, @"tabWidth":@FTB_TAB_SIZE,@"statusBarHeight":@20.0};
+    if (IS_IPAD) {
+        if (IS_RETINA) metrics = @{@"pixel":@0.5, @"barHeight":@FTB_BAR_SIZE_IPAD, @"tabWidth":@FTB_TAB_SIZE_IPAD,@"statusBarHeight":@20.0};
+        else metrics = @{@"pixel":@1.0, @"barHeight":@FTB_BAR_SIZE_IPAD, @"tabWidth":@FTB_TAB_SIZE_IPAD,@"statusBarHeight":@20.0};
+    } else {
+        if (IS_RETINA) metrics = @{@"pixel":@0.5, @"barHeight":@FTB_BAR_SIZE_IPHONE, @"tabWidth":@FTB_TAB_SIZE_IPHONE,@"statusBarHeight":@20.0};
+        else metrics = @{@"pixel":@1.0, @"barHeight":@FTB_BAR_SIZE_IPHONE, @"tabWidth":@FTB_TAB_SIZE_IPHONE,@"statusBarHeight":@20.0};
+    }
 
     // CONSTRAINTS
     NSDictionary* views = NSDictionaryOfVariableBindings(tabBar,contentContainer);
@@ -95,6 +100,13 @@ static const NSInteger TagOffset = 1000;
     if (IS_IPAD) orient = FTB_ORIENT_IPAD;
     else orient = FTB_ORIENT_IPHONE;
     return orient;
+}
+
+-(FTBStyleType)getStyle {
+    FTBStyleType style;
+    if (IS_IPAD) style = FTB_STYLE_IPAD;
+    else style = FTB_STYLE_IPHONE;
+    return style;
 }
 
 - (void)addTabButtons {
@@ -144,6 +156,7 @@ static const NSInteger TagOffset = 1000;
         UIView *tab = [tabs objectAtIndex:i];
         NSDictionary *single = NSDictionaryOfVariableBindings(tab);
         FTBOrientType orient = [self getOrient];
+        FTBStyleType style = [self getStyle];
         
         switch (orient) {
                 
@@ -161,7 +174,7 @@ static const NSInteger TagOffset = 1000;
                 
                 // TAB SPACING STYLE
                 if (i == 0) { // TOP tab is glued to the top of the bar
-                    if (FTB_STYLE == ftbStyleSpread) {
+                    if (style == ftbStyleSpread) {
                         [tabBar addVisualConstraints:@"V:|-pixel-[tab]" forViews:single withMetrics:metrics];
                     } else {
                         [tabBar addVisualConstraints:@"V:|-pixel-[tab(==tabWidth)]" forViews:single withMetrics:metrics];
@@ -169,7 +182,7 @@ static const NSInteger TagOffset = 1000;
                 } else { // others come after and are the same size as the first
                     UIView *prevTab = [tabs objectAtIndex:(i - 1)];
                     NSDictionary *tabviews = NSDictionaryOfVariableBindings(tab, prevTab);
-                    if (FTB_STYLE == ftbStyleSpread) {
+                    if (style == ftbStyleSpread) {
                         [tabBar addVisualConstraints:@"V:[prevTab]-pixel-[tab(==prevTab)]" forViews:tabviews withMetrics:metrics];
                         if (i == tabs.count - 1) { // BOTTOM tab is attached to bottom if spread
                             [tabBar addVisualConstraints:@"V:[tab]|" forViews:tabviews withMetrics:metrics];
@@ -196,7 +209,7 @@ static const NSInteger TagOffset = 1000;
                 
                 // TAB SPACING STYLE
                 if (i == 0) { // LEFT tab is glued to the left end of the bar
-                    if (FTB_STYLE == ftbStyleSpread) {
+                    if (style == ftbStyleSpread) {
                         [tabBar addVisualConstraints:@"|[tab]" forViews:single];
                     } else {
                         [tabBar addVisualConstraints:@"|[tab(==tabWidth)]" forViews:single withMetrics:metrics];
@@ -204,7 +217,7 @@ static const NSInteger TagOffset = 1000;
                 } else { // others come after and are the same size as the first
                     UIView *prevTab = [tabs objectAtIndex:(i - 1)];
                     NSDictionary *tabviews = NSDictionaryOfVariableBindings(tab, prevTab);
-                    if (FTB_STYLE == ftbStyleSpread) {
+                    if (style == ftbStyleSpread) {
                         [tabBar addVisualConstraints:@"[prevTab]-pixel-[tab(==prevTab)]" forViews:tabviews withMetrics:metrics];
                         if (i == tabs.count - 1) { // RIGHT tab is attached to end if spread
                             [tabBar addVisualConstraints:@"[tab]|" forViews:tabviews withMetrics:metrics];
