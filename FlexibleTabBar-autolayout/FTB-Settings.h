@@ -20,10 +20,10 @@
 #define     TAB_FONT_NAME      @"ftb"
 #define     TAB_FONT_SIZE      36.0f
 
-#define     FTB_BAR_SIZE       44.0f
-#define     FTB_TAB_SIZE       60.0f
+#define     FTB_BAR_SIZE       60.0f
+#define     FTB_TAB_SIZE       65.0f
 
-#define     FTB_ORIENT_IPHONE  orientBottom // top, left, right, bottom
+#define     FTB_ORIENT_IPHONE  orientLeft // top, left, right, bottom
 #define     FTB_ORIENT_IPAD    orientLeft
 // UNIMPLEMENTED FEATURES
 #define     FTB_STYLE          ftbStyleGrouped // grouped, spread

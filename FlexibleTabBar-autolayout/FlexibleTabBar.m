@@ -30,7 +30,7 @@ static const NSInteger TagOffset = 1000;
     
     // to keep view from goind all the way under status and nav bar
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    self.view.backgroundColor = [UIColor grayColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     /*
      * CREATE TAB BAR
@@ -53,8 +53,8 @@ static const NSInteger TagOffset = 1000;
     [self.view addSubview:contentContainer];
     
     // set metrics based on display type
-    if (IS_RETINA) metrics = @{@"pixel":@0.5, @"barHeight":@FTB_BAR_SIZE, @"tabWidth":@FTB_TAB_SIZE};
-    else metrics = @{@"pixel":@1.0, @"barHeight":@FTB_BAR_SIZE, @"tabWidth":@FTB_TAB_SIZE};
+    if (IS_RETINA) metrics = @{@"pixel":@0.5, @"barHeight":@FTB_BAR_SIZE, @"tabWidth":@FTB_TAB_SIZE,@"statusBarHeight":@20.0};
+    else metrics = @{@"pixel":@1.0, @"barHeight":@FTB_BAR_SIZE, @"tabWidth":@FTB_TAB_SIZE,@"statusBarHeight":@20.0};
 
     // CONSTRAINTS
     NSDictionary* views = NSDictionaryOfVariableBindings(tabBar,contentContainer);
@@ -65,7 +65,7 @@ static const NSInteger TagOffset = 1000;
         case orientTop:
             [self.view addVisualConstraints:@"|[tabBar]|" forViews:views];
             [self.view addVisualConstraints:@"|[contentContainer]|" forViews:views];
-            [self.view addVisualConstraints:@"V:|[tabBar(==barHeight)][contentContainer]|" forViews:views withMetrics:metrics];
+            [self.view addVisualConstraints:@"V:|-statusBarHeight-[tabBar(==barHeight)][contentContainer]|" forViews:views withMetrics:metrics];
             break;
             
         case orientBottom:
@@ -75,13 +75,13 @@ static const NSInteger TagOffset = 1000;
             break;
             
         case orientLeft:
-            [self.view addVisualConstraints:@"V:|[tabBar]|" forViews:views];
+            [self.view addVisualConstraints:@"V:|-statusBarHeight-[tabBar]|" forViews:views withMetrics:metrics];
             [self.view addVisualConstraints:@"V:|[contentContainer]|" forViews:views];
             [self.view addVisualConstraints:@"|[tabBar(==barHeight)][contentContainer]|" forViews:views withMetrics:metrics];
             break;
             
         case orientRight:
-            [self.view addVisualConstraints:@"V:|[tabBar]|" forViews:views];
+            [self.view addVisualConstraints:@"V:|-statusBarHeight-[tabBar]|" forViews:views withMetrics:metrics];
             [self.view addVisualConstraints:@"V:|[contentContainer]|" forViews:views];
             [self.view addVisualConstraints:@"|[contentContainer][tabBar(==barHeight)]|" forViews:views withMetrics:metrics];
             break;
@@ -162,9 +162,9 @@ static const NSInteger TagOffset = 1000;
                 // TAB SPACING STYLE
                 if (i == 0) { // TOP tab is glued to the top of the bar
                     if (FTB_STYLE == ftbStyleSpread) {
-                        [tabBar addVisualConstraints:@"V:|[tab]" forViews:single];
+                        [tabBar addVisualConstraints:@"V:|-pixel-[tab]" forViews:single withMetrics:metrics];
                     } else {
-                        [tabBar addVisualConstraints:@"V:|[tab(==tabWidth)]" forViews:single withMetrics:metrics];
+                        [tabBar addVisualConstraints:@"V:|-pixel-[tab(==tabWidth)]" forViews:single withMetrics:metrics];
                     }
                 } else { // others come after and are the same size as the first
                     UIView *prevTab = [tabs objectAtIndex:(i - 1)];
