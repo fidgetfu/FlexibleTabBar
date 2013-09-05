@@ -22,12 +22,10 @@
 		E147F5AB17CF19DD00A4E07F /* ListView.m in Sources */ = {isa = PBXBuildFile; fileRef = E147F5AA17CF19DD00A4E07F /* ListView.m */; };
 		E1AF19FF17CF1C920014C147 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1AF19FE17CF1C920014C147 /* iPhone.storyboard */; };
 		E1AF1A0117CF1CA10014C147 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1AF1A0017CF1CA10014C147 /* iPad.storyboard */; };
-		E1AF1A0817CF1D250014C147 /* FlexibleTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AF1A0417CF1D250014C147 /* FlexibleTabBar.m */; };
-		E1AF1A0917CF1D250014C147 /* FlexibleTabBarIndicator.png in Resources */ = {isa = PBXBuildFile; fileRef = E1AF1A0517CF1D250014C147 /* FlexibleTabBarIndicator.png */; };
-		E1AF1A0A17CF1D250014C147 /* FlexibleTabBarIndicator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1AF1A0617CF1D250014C147 /* FlexibleTabBarIndicator@2x.png */; };
 		E1AF1A0C17CF1DC80014C147 /* ftb.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E1AF1A0B17CF1DC80014C147 /* ftb.ttf */; };
-		E1AF1A0F17CF28300014C147 /* ExtraView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AF1A0E17CF28300014C147 /* ExtraView.m */; };
 		E1AF1A1217CF39860014C147 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AF1A1117CF39860014C147 /* UIView+AutoLayout.m */; };
+		E1C0746517D893A700C4557C /* FlexibleTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C0745C17D893A700C4557C /* FlexibleTabBar.m */; };
+		E1C0746617D893A700C4557C /* FlexibleTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C0745C17D893A700C4557C /* FlexibleTabBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,17 +59,12 @@
 		E147F5AA17CF19DD00A4E07F /* ListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListView.m; sourceTree = "<group>"; };
 		E1AF19FE17CF1C920014C147 /* iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPhone.storyboard; sourceTree = "<group>"; };
 		E1AF1A0017CF1CA10014C147 /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPad.storyboard; sourceTree = "<group>"; };
-		E1AF1A0317CF1D250014C147 /* FlexibleTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlexibleTabBar.h; sourceTree = "<group>"; };
-		E1AF1A0417CF1D250014C147 /* FlexibleTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlexibleTabBar.m; sourceTree = "<group>"; };
-		E1AF1A0517CF1D250014C147 /* FlexibleTabBarIndicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FlexibleTabBarIndicator.png; sourceTree = "<group>"; };
-		E1AF1A0617CF1D250014C147 /* FlexibleTabBarIndicator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FlexibleTabBarIndicator@2x.png"; sourceTree = "<group>"; };
-		E1AF1A0717CF1D250014C147 /* FTB-Settings-Old.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FTB-Settings-Old.h"; sourceTree = "<group>"; };
 		E1AF1A0B17CF1DC80014C147 /* ftb.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ftb.ttf; sourceTree = "<group>"; };
-		E1AF1A0D17CF28300014C147 /* ExtraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtraView.h; sourceTree = "<group>"; };
-		E1AF1A0E17CF28300014C147 /* ExtraView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtraView.m; sourceTree = "<group>"; };
 		E1AF1A1017CF39860014C147 /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
 		E1AF1A1117CF39860014C147 /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
-		E1D5908D17D08D3B0090C76D /* FTB-Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FTB-Settings.h"; sourceTree = "<group>"; };
+		E1C0745B17D893A700C4557C /* FlexibleTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlexibleTabBar.h; sourceTree = "<group>"; };
+		E1C0745C17D893A700C4557C /* FlexibleTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlexibleTabBar.m; sourceTree = "<group>"; };
+		E1C0745D17D893A700C4557C /* FTB-Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FTB-Settings.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +96,7 @@
 			children = (
 				E1AF1A1017CF39860014C147 /* UIView+AutoLayout.h */,
 				E1AF1A1117CF39860014C147 /* UIView+AutoLayout.m */,
+				E1C0745A17D893A700C4557C /* FTB-autolayout */,
 				E147F58017CF170000A4E07F /* FlexibleTabBar */,
 				E147F59917CF170100A4E07F /* FlexibleTabBarTests */,
 				E147F57917CF170000A4E07F /* Frameworks */,
@@ -135,13 +129,9 @@
 			children = (
 				E147F58917CF170000A4E07F /* AppDelegate.h */,
 				E147F58A17CF170000A4E07F /* AppDelegate.m */,
-				E1AF1A0217CF1D250014C147 /* FlexibleTabBar */,
-				E1AF19FD17CF1C460014C147 /* Resources */,
 				E147F5A917CF19DD00A4E07F /* ListView.h */,
 				E147F5AA17CF19DD00A4E07F /* ListView.m */,
-				E1D5908D17D08D3B0090C76D /* FTB-Settings.h */,
-				E1AF1A0D17CF28300014C147 /* ExtraView.h */,
-				E1AF1A0E17CF28300014C147 /* ExtraView.m */,
+				E1AF19FD17CF1C460014C147 /* Resources */,
 				E147F58117CF170000A4E07F /* Supporting Files */,
 			);
 			path = FlexibleTabBar;
@@ -187,17 +177,15 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		E1AF1A0217CF1D250014C147 /* FlexibleTabBar */ = {
+		E1C0745A17D893A700C4557C /* FTB-autolayout */ = {
 			isa = PBXGroup;
 			children = (
-				E1AF1A0717CF1D250014C147 /* FTB-Settings-Old.h */,
-				E1AF1A0317CF1D250014C147 /* FlexibleTabBar.h */,
-				E1AF1A0417CF1D250014C147 /* FlexibleTabBar.m */,
-				E1AF1A0517CF1D250014C147 /* FlexibleTabBarIndicator.png */,
-				E1AF1A0617CF1D250014C147 /* FlexibleTabBarIndicator@2x.png */,
+				E1C0745D17D893A700C4557C /* FTB-Settings.h */,
+				E1C0745B17D893A700C4557C /* FlexibleTabBar.h */,
+				E1C0745C17D893A700C4557C /* FlexibleTabBar.m */,
 			);
-			name = FlexibleTabBar;
-			path = ../../FlexibleTabBar;
+			name = "FTB-autolayout";
+			path = "../FlexibleTabBar-autolayout";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,8 +270,6 @@
 				E147F58517CF170000A4E07F /* InfoPlist.strings in Resources */,
 				E1AF1A0C17CF1DC80014C147 /* ftb.ttf in Resources */,
 				E1AF19FF17CF1C920014C147 /* iPhone.storyboard in Resources */,
-				E1AF1A0A17CF1D250014C147 /* FlexibleTabBarIndicator@2x.png in Resources */,
-				E1AF1A0917CF1D250014C147 /* FlexibleTabBarIndicator.png in Resources */,
 				E147F58D17CF170000A4E07F /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,12 +289,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1C0746517D893A700C4557C /* FlexibleTabBar.m in Sources */,
 				E147F58B17CF170000A4E07F /* AppDelegate.m in Sources */,
 				E1AF1A1217CF39860014C147 /* UIView+AutoLayout.m in Sources */,
 				E147F5AB17CF19DD00A4E07F /* ListView.m in Sources */,
-				E1AF1A0817CF1D250014C147 /* FlexibleTabBar.m in Sources */,
 				E147F58717CF170000A4E07F /* main.m in Sources */,
-				E1AF1A0F17CF28300014C147 /* ExtraView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +301,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1C0746617D893A700C4557C /* FlexibleTabBar.m in Sources */,
 				E147F5A017CF170100A4E07F /* FlexibleTabBarTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

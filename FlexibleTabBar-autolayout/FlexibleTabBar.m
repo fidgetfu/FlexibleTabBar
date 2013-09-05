@@ -1,22 +1,22 @@
 //
-//  ExtraView.m
+//  FlexibleTabBar.m
 //  FlexibleTabBar
 //
 //  Created by Amy Nugent on 29/08/13.
 //  Copyright (c) 2013 Amy Nugent. All rights reserved.
 //
 
-#import "ExtraView.h"
+#import "FlexibleTabBar.h"
 #import "UIView+AutoLayout.h"
 #import "FTB-Settings.h"
 
 static const NSInteger TagOffset = 1000;
 
-@interface ExtraView ()
+@interface FlexibleTabBar ()
 
 @end
 
-@implementation ExtraView {
+@implementation FlexibleTabBar {
     UIView *tabBar;
 	UIView *contentContainer;
     NSDictionary *metrics;
@@ -230,13 +230,16 @@ static const NSInteger TagOffset = 1000;
     
     [tab setBackgroundColor:TAB_SELECTED_BG];
 	//[button setTitleColor:TAB_SELECTED_FG forState:UIControlStateNormal];
+    // the view version
+    [[tab.subviews objectAtIndex:0] setTextColor:TAB_SELECTED_FG];
 }
 
 - (void)deselectTabButton:(UIView *)tab {
     
     [tab setBackgroundColor:TAB_BG];
 	//[button setTitleColor:TAB_FG forState:UIControlStateNormal];
-    
+    // the view version
+    [[tab.subviews objectAtIndex:0] setTextColor:TAB_FG];
 }
 
 

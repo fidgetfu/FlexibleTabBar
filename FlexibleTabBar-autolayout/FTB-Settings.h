@@ -27,12 +27,12 @@
 #define     TAB_FONT_NAME      @"ftb"
 #define     TAB_FONT_SIZE      36.0f
 
-#define     TAB_SELECTED_FG    [UIColor colorWithRed:0.14f green:0.37f blue:0.57f alpha:1.00f]
-#define     TAB_SELECTED_BG    [UIColor colorWithRed:0.22f green:0.57f blue:0.89f alpha:1.00f]
-#define     TAB_FG             [UIColor colorWithRed:0.10f green:0.16f blue:0.42f alpha:1.00f]
-#define     TAB_BG             [UIColor colorWithRed:0.16f green:0.25f blue:0.64f alpha:1.00f]
-#define     BAR_BG             TAB_FG   // background to show between buttons
-#define     DIVIDER            [UIColor darkGrayColor] // pixel divider between tab bar and content view
+#define     TAB_SELECTED_FG    [UIColor colorWithRed:0.00f green:0.53f blue:0.61f alpha:1.00f]
+#define     TAB_SELECTED_BG    [UIColor colorWithRed:0.49f green:0.83f blue:0.88f alpha:1.00f]
+#define     TAB_FG             [UIColor colorWithRed:0.58f green:0.70f blue:0.71f alpha:1.00f]
+#define     TAB_BG             [UIColor colorWithRed:0.79f green:0.87f blue:0.89f alpha:1.00f]
+#define     BAR_BG             [UIColor colorWithRed:0.56f green:0.65f blue:0.67f alpha:1.00f]
+#define     DIVIDER            [UIColor colorWithRed:0.72f green:0.72f blue:0.72f alpha:1.00f]
 
 /*
  * DEFINITIONS

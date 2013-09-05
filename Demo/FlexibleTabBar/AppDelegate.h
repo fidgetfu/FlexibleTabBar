@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Amy Nugent. All rights reserved.
 //
 
-#import "ExtraView.h"
+#import "FlexibleTabBar.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, ExtraViewDelegate>
 

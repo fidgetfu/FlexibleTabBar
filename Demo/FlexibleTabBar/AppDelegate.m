@@ -10,7 +10,7 @@
 
 #import "FTB-Settings.h"
 #import "ListView.h"
-#import "ExtraView.h"
+#import "FlexibleTabBar.h"
 
 @implementation AppDelegate
 
@@ -39,7 +39,7 @@
     // Set up the tab bar controller with those views
 	NSArray *viewControllers = @[navigationController1, navigationController2];
     
-    ExtraView *tabBarController = [[ExtraView alloc] init];
+    FlexibleTabBar *tabBarController = [[FlexibleTabBar alloc] init];
     tabBarController.delegate = self;
     tabBarController.viewControllers = viewControllers;
     
