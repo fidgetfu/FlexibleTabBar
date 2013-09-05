@@ -1,20 +1,20 @@
 //
-//  ListView.m
+//  ListViewB.m
 //  FlexibleTabBar
 //
 //  Created by Amy Nugent on 29/08/13.
 //  Copyright (c) 2013 Amy Nugent. All rights reserved.
 //
 
-#import "ListView.h"
+#import "ListViewB.h"
 
-@interface ListView () {
+@interface ListViewB () {
     NSArray *listOfItems;
 }
 
 @end
 
-@implementation ListView
+@implementation ListViewB
 
 
 - (void)viewDidLoad
@@ -22,7 +22,7 @@
     [super viewDidLoad];
     // configure here
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
-    listOfItems = [[NSArray alloc] initWithObjects:@"Apple",@"Orange",@"Pear",@"Pomengranate", nil];
+    listOfItems = [[NSArray alloc] initWithObjects:@"Kitty",@"Puppy",@"Kit",@"Lamb", nil];
 }
 
 - (void)didReceiveMemoryWarning

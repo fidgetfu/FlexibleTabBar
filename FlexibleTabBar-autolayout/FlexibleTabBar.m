@@ -29,7 +29,7 @@ static const NSInteger TagOffset = 1000;
     [super viewDidLoad];
     
     // to keep view from goind all the way under status and nav bar
-    self.edgesForExtendedLayout = UIRectEdgeNone;
+    // self.edgesForExtendedLayout = UIRectEdgeNone;
     self.view.backgroundColor = [UIColor whiteColor];
     
     /*
@@ -241,16 +241,12 @@ static const NSInteger TagOffset = 1000;
 - (void)selectTabButton:(UIView *)tab {
     
     [tab setBackgroundColor:TAB_SELECTED_BG];
-	//[button setTitleColor:TAB_SELECTED_FG forState:UIControlStateNormal];
-    // the view version
     [[tab.subviews objectAtIndex:0] setTextColor:TAB_SELECTED_FG];
 }
 
 - (void)deselectTabButton:(UIView *)tab {
     
     [tab setBackgroundColor:TAB_BG];
-	//[button setTitleColor:TAB_FG forState:UIControlStateNormal];
-    // the view version
     [[tab.subviews objectAtIndex:0] setTextColor:TAB_FG];
 }
 

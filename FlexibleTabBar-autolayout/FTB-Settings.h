@@ -14,8 +14,10 @@
  *  Edit these settings to get FTB to fit the look of your app
  */
 
-#define     TAB_NAMES          @[@"UITableView", @"Storyboard"]
-#define     TAB_SYMBOLS        @[@"!", @"#"]
+#define     FTB_STYLE          ftbStyleGrouped // grouped, spread
+
+#define     TAB_NAMES          @[@"UITableView A", @"UITableView B", @"Storyboard"]
+#define     TAB_SYMBOLS        @[@"!", @"#", @"$"]
 
 #define     TAB_FONT_NAME      @"ftb"
 #define     TAB_FONT_SIZE      36.0f
@@ -25,15 +27,9 @@
 
 #define     FTB_ORIENT_IPHONE  orientLeft // top, left, right, bottom
 #define     FTB_ORIENT_IPAD    orientLeft
-// UNIMPLEMENTED FEATURES
-#define     FTB_STYLE          ftbStyleGrouped // grouped, spread
-#define     FTB_COLOR_STYLE    ftbColorStyleSingle  // single, multi
 
-// CHOOSE COLORS
-// if you have multicolored tabs, define them here
-#define     TAB_SELECTED_FG_COLORS  @[[UIColor colorWithRed:0.39f green:0.39f blue:0.39f alpha:1.00f],[UIColor colorWithRed:0.39f green:0.39f blue:0.39f alpha:1.00f]];
-#define     TAB_SELECTED_BG_COLORS  @[[UIColor colorWithRed:1.00f green:0.76f blue:0.29f alpha:1.00f],[UIColor colorWithRed:0.38f green:0.73f blue:1.00f alpha:1.00f]];
-// otherwise these colors will be used for all tabs
+
+// color for the selected tab
 #define     TAB_SELECTED_FG    [UIColor colorWithRed:0.00f green:0.53f blue:0.61f alpha:1.00f]
 #define     TAB_SELECTED_BG    [UIColor colorWithRed:0.49f green:0.83f blue:0.88f alpha:1.00f]
 // unselected tabs (this is always the unselected color)
@@ -60,11 +56,6 @@ typedef enum FTBStyleType : NSUInteger {
     ftbStyleGrouped     // group all buttons at top or left of bar, fixed button size
 } FTBStyleType;
 
-typedef enum FTBColorStyleType : NSUInteger {
-    ftbColorStyleSingle,     // the same color will be used for every tab when selected
-    ftbColorStyleMulti      // each tab will have a different color when selected
-} FTBColorStyleType;
-
 /*
  * MACROS
  * Don't touch
@@ -76,16 +67,6 @@ typedef enum FTBColorStyleType : NSUInteger {
 
 #define TabName(a)     [TAB_NAMES objectAtIndex:a];
 #define TabSymbol(a)   [TAB_SYMBOLS objectAtIndex:a];
-#define TabFgColor(a)  [TAB_SELECTED_FG_COLORS objectAtIndex:a];
-#define TabBgColor(a)  [TAB_SELECTED_BG_COLORS objectAtIndex:a];
 #define ButtonFont     [UIFont fontWithName:TAB_FONT_NAME size:TAB_FONT_SIZE]
-
-/*
- * LAYOUT
- * some visual layout constraints, 
- * written here to make code simpler in the VC
- */
-
-
 
 #endif

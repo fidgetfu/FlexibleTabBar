@@ -19,7 +19,9 @@
 		E147F59617CF170100A4E07F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E147F57E17CF170000A4E07F /* UIKit.framework */; };
 		E147F59E17CF170100A4E07F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E147F59C17CF170100A4E07F /* InfoPlist.strings */; };
 		E147F5A017CF170100A4E07F /* FlexibleTabBarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E147F59F17CF170100A4E07F /* FlexibleTabBarTests.m */; };
-		E147F5AB17CF19DD00A4E07F /* ListView.m in Sources */ = {isa = PBXBuildFile; fileRef = E147F5AA17CF19DD00A4E07F /* ListView.m */; };
+		E147F5AB17CF19DD00A4E07F /* ListViewA.m in Sources */ = {isa = PBXBuildFile; fileRef = E147F5AA17CF19DD00A4E07F /* ListViewA.m */; };
+		E14EDA6B17D8F8CA0044A3C4 /* ListViewB.m in Sources */ = {isa = PBXBuildFile; fileRef = E14EDA6A17D8F8CA0044A3C4 /* ListViewB.m */; };
+		E14EDA6C17D8F8CA0044A3C4 /* ListViewB.m in Sources */ = {isa = PBXBuildFile; fileRef = E14EDA6A17D8F8CA0044A3C4 /* ListViewB.m */; };
 		E1AF19FF17CF1C920014C147 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1AF19FE17CF1C920014C147 /* iPhone.storyboard */; };
 		E1AF1A0117CF1CA10014C147 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1AF1A0017CF1CA10014C147 /* iPad.storyboard */; };
 		E1AF1A0C17CF1DC80014C147 /* ftb.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E1AF1A0B17CF1DC80014C147 /* ftb.ttf */; };
@@ -55,8 +57,10 @@
 		E147F59B17CF170100A4E07F /* FlexibleTabBarTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FlexibleTabBarTests-Info.plist"; sourceTree = "<group>"; };
 		E147F59D17CF170100A4E07F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E147F59F17CF170100A4E07F /* FlexibleTabBarTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlexibleTabBarTests.m; sourceTree = "<group>"; };
-		E147F5A917CF19DD00A4E07F /* ListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListView.h; sourceTree = "<group>"; };
-		E147F5AA17CF19DD00A4E07F /* ListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListView.m; sourceTree = "<group>"; };
+		E147F5A917CF19DD00A4E07F /* ListViewA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewA.h; sourceTree = "<group>"; };
+		E147F5AA17CF19DD00A4E07F /* ListViewA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewA.m; sourceTree = "<group>"; };
+		E14EDA6917D8F8CA0044A3C4 /* ListViewB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewB.h; sourceTree = "<group>"; };
+		E14EDA6A17D8F8CA0044A3C4 /* ListViewB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewB.m; sourceTree = "<group>"; };
 		E1AF19FE17CF1C920014C147 /* iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPhone.storyboard; sourceTree = "<group>"; };
 		E1AF1A0017CF1CA10014C147 /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPad.storyboard; sourceTree = "<group>"; };
 		E1AF1A0B17CF1DC80014C147 /* ftb.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ftb.ttf; sourceTree = "<group>"; };
@@ -129,8 +133,10 @@
 			children = (
 				E147F58917CF170000A4E07F /* AppDelegate.h */,
 				E147F58A17CF170000A4E07F /* AppDelegate.m */,
-				E147F5A917CF19DD00A4E07F /* ListView.h */,
-				E147F5AA17CF19DD00A4E07F /* ListView.m */,
+				E147F5A917CF19DD00A4E07F /* ListViewA.h */,
+				E147F5AA17CF19DD00A4E07F /* ListViewA.m */,
+				E14EDA6917D8F8CA0044A3C4 /* ListViewB.h */,
+				E14EDA6A17D8F8CA0044A3C4 /* ListViewB.m */,
 				E1AF19FD17CF1C460014C147 /* Resources */,
 				E147F58117CF170000A4E07F /* Supporting Files */,
 			);
@@ -292,7 +298,8 @@
 				E1C0746517D893A700C4557C /* FlexibleTabBar.m in Sources */,
 				E147F58B17CF170000A4E07F /* AppDelegate.m in Sources */,
 				E1AF1A1217CF39860014C147 /* UIView+AutoLayout.m in Sources */,
-				E147F5AB17CF19DD00A4E07F /* ListView.m in Sources */,
+				E14EDA6B17D8F8CA0044A3C4 /* ListViewB.m in Sources */,
+				E147F5AB17CF19DD00A4E07F /* ListViewA.m in Sources */,
 				E147F58717CF170000A4E07F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -301,6 +308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E14EDA6C17D8F8CA0044A3C4 /* ListViewB.m in Sources */,
 				E1C0746617D893A700C4557C /* FlexibleTabBar.m in Sources */,
 				E147F5A017CF170100A4E07F /* FlexibleTabBarTests.m in Sources */,
 			);

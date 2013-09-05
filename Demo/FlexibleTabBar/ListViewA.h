@@ -1,5 +1,5 @@
 //
-//  ListView.h
+//  ListViewA.h
 //  FlexibleTabBar
 //
 //  Created by Amy Nugent on 29/08/13.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ListView : UITableViewController
+@interface ListViewA : UITableViewController
 
 @end
