@@ -9,8 +9,9 @@
 #import "AppDelegate.h"
 
 #import "FTB-Settings.h"
-#import "ListView.h"
-#import "ExtraView.h"
+#import "ListViewA.h"
+#import "ListViewB.h"
+#import "FlexibleTabBar.h"
 
 @implementation AppDelegate
 
@@ -23,23 +24,28 @@
     
     // Create some views for it to manage
     // 1st view - a basic code-only table view controller
-	ListView *listView = [[ListView alloc] initWithStyle:UITableViewStylePlain];
-    listView.title = TabName(0);
+	ListViewA *listViewA = [[ListViewA alloc] initWithStyle:UITableViewStylePlain];
+    listViewA.title = TabName(0);
     UINavigationController * navigationController1 = [[UINavigationController alloc]
-                                                      initWithRootViewController:listView];
+                                                      initWithRootViewController:listViewA];
+    // 2nd view - a basic code-only table view controller
+	ListViewB *listViewB = [[ListViewB alloc] initWithStyle:UITableViewStylePlain];
+    listViewB.title = TabName(1);
+    UINavigationController * navigationController2 = [[UINavigationController alloc]
+                                                      initWithRootViewController:listViewB];
     // 2nd view - a storyboard defined view
     UIStoryboard *viewStoryboard;
     if (IS_IPAD) viewStoryboard = [UIStoryboard storyboardWithName:@"iPad" bundle:nil];
     else viewStoryboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     UIViewController *viewController = [viewStoryboard instantiateViewControllerWithIdentifier:@"ViewController"];
-    viewController.title = TabName(1);
-    UINavigationController * navigationController2 = [[UINavigationController alloc]
+    viewController.title = TabName(2);
+    UINavigationController * navigationController3 = [[UINavigationController alloc]
                                                       initWithRootViewController:viewController];
     
     // Set up the tab bar controller with those views
-	NSArray *viewControllers = @[navigationController1, navigationController2];
+	NSArray *viewControllers = @[navigationController1, navigationController2,navigationController3];
     
-    ExtraView *tabBarController = [[ExtraView alloc] init];
+    FlexibleTabBar *tabBarController = [[FlexibleTabBar alloc] init];
     tabBarController.delegate = self;
     tabBarController.viewControllers = viewControllers;
     

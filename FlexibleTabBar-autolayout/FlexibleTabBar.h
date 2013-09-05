@@ -1,5 +1,5 @@
 //
-//  ExtraView.h
+//  FlexibleTabBar.h
 //  FlexibleTabBar
 //
 //  Created by Amy Nugent on 29/08/13.
@@ -8,7 +8,7 @@
 
 @protocol ExtraViewDelegate;
 
-@interface ExtraView : UIViewController
+@interface FlexibleTabBar : UIViewController
 
 @property (nonatomic, copy) NSArray *viewControllers;
 @property (nonatomic, weak) UIViewController *selectedViewController;
@@ -25,6 +25,6 @@
  */
 @protocol ExtraViewDelegate <NSObject>
 @optional
-- (BOOL)flexTabBar:(ExtraView *)tabBarController shouldSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index;
-- (void)flexTabBar:(ExtraView *)tabBarController didSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index;
+- (BOOL)flexTabBar:(FlexibleTabBar *)tabBarController shouldSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index;
+- (void)flexTabBar:(FlexibleTabBar *)tabBarController didSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index;
 @end

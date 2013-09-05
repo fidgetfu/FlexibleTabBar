@@ -1,34 +1,36 @@
 //
-//  ExtraView.m
+//  FlexibleTabBar.m
 //  FlexibleTabBar
 //
 //  Created by Amy Nugent on 29/08/13.
 //  Copyright (c) 2013 Amy Nugent. All rights reserved.
 //
 
-#import "ExtraView.h"
+#import "FlexibleTabBar.h"
 #import "UIView+AutoLayout.h"
 #import "FTB-Settings.h"
 
 static const NSInteger TagOffset = 1000;
 
-@interface ExtraView ()
+@interface FlexibleTabBar ()
 
 @end
 
-@implementation ExtraView {
+@implementation FlexibleTabBar {
     UIView *tabBar;
 	UIView *contentContainer;
     NSDictionary *metrics;
 }
+
+#pragma mark - Drawing
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     // to keep view from goind all the way under status and nav bar
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-    self.view.backgroundColor = [UIColor grayColor];
+    // self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.view.backgroundColor = [UIColor whiteColor];
     
     /*
      * CREATE TAB BAR
@@ -39,11 +41,6 @@ static const NSInteger TagOffset = 1000;
     tabBar.translatesAutoresizingMaskIntoConstraints = NO; // Required for auto layout
     tabBar.backgroundColor = BAR_BG;
     [self.view addSubview:tabBar];
-    
-    UIView* divider = [[UIView alloc] init];
-    divider.translatesAutoresizingMaskIntoConstraints = NO;
-    divider.backgroundColor = DIVIDER;
-    [self.view addSubview:divider];
     
     /*
      * CREATE CONTAINER VIEW
@@ -56,52 +53,47 @@ static const NSInteger TagOffset = 1000;
     [self.view addSubview:contentContainer];
     
     // set metrics based on display type
-    if (IS_RETINA) metrics = @{@"pixel":@0.5, @"barHeight":@FTB_BAR_SIZE, @"tabWidth":@FTB_TAB_SIZE};
-    else metrics = @{@"pixel":@1.0, @"barHeight":@FTB_BAR_SIZE, @"tabWidth":@FTB_TAB_SIZE};
+    if (IS_IPAD) {
+        if (IS_RETINA) metrics = @{@"pixel":@0.5, @"barHeight":@FTB_BAR_SIZE_IPAD, @"tabWidth":@FTB_TAB_SIZE_IPAD,@"statusBarHeight":@20.0};
+        else metrics = @{@"pixel":@1.0, @"barHeight":@FTB_BAR_SIZE_IPAD, @"tabWidth":@FTB_TAB_SIZE_IPAD,@"statusBarHeight":@20.0};
+    } else {
+        if (IS_RETINA) metrics = @{@"pixel":@0.5, @"barHeight":@FTB_BAR_SIZE_IPHONE, @"tabWidth":@FTB_TAB_SIZE_IPHONE,@"statusBarHeight":@20.0};
+        else metrics = @{@"pixel":@1.0, @"barHeight":@FTB_BAR_SIZE_IPHONE, @"tabWidth":@FTB_TAB_SIZE_IPHONE,@"statusBarHeight":@20.0};
+    }
 
     // CONSTRAINTS
-    NSDictionary* views = NSDictionaryOfVariableBindings(tabBar,divider,contentContainer);
+    NSDictionary* views = NSDictionaryOfVariableBindings(tabBar,contentContainer);
     
     FTBOrientType orient = [self getOrient];
     
     switch (orient) {
         case orientTop:
             [self.view addVisualConstraints:@"|[tabBar]|" forViews:views];
-            [self.view addVisualConstraints:@"|[divider]|" forViews:views];
             [self.view addVisualConstraints:@"|[contentContainer]|" forViews:views];
-            [self.view addVisualConstraints:@"V:|[tabBar(==barHeight)][divider]" forViews:views withMetrics:metrics];
-            [self.view addVisualConstraints:@"V:[divider][contentContainer]|" forViews:views];
+            [self.view addVisualConstraints:@"V:|-statusBarHeight-[tabBar(==barHeight)][contentContainer]|" forViews:views withMetrics:metrics];
             break;
             
         case orientBottom:
             [self.view addVisualConstraints:@"|[tabBar]|" forViews:views];
-            [self.view addVisualConstraints:@"|[divider]|" forViews:views];
             [self.view addVisualConstraints:@"|[contentContainer]|" forViews:views];
-            [self.view addVisualConstraints:@"V:[divider][tabBar(==barHeight)]|" forViews:views withMetrics:metrics];
-            [self.view addVisualConstraints:@"V:|[contentContainer][divider(==pixel)]" forViews:views withMetrics:metrics];
+            [self.view addVisualConstraints:@"V:|[contentContainer][tabBar(==barHeight)]|" forViews:views withMetrics:metrics];
             break;
             
         case orientLeft:
-            [self.view addVisualConstraints:@"V:|[tabBar]|" forViews:views];
-            [self.view addVisualConstraints:@"V:|[divider]|" forViews:views];
+            [self.view addVisualConstraints:@"V:|-statusBarHeight-[tabBar]|" forViews:views withMetrics:metrics];
             [self.view addVisualConstraints:@"V:|[contentContainer]|" forViews:views];
-            [self.view addVisualConstraints:@"|[tabBar(==barHeight)][divider]" forViews:views withMetrics:metrics];
-            [self.view addVisualConstraints:@"[divider][contentContainer]|" forViews:views];
+            [self.view addVisualConstraints:@"|[tabBar(==barHeight)][contentContainer]|" forViews:views withMetrics:metrics];
             break;
             
         case orientRight:
-            [self.view addVisualConstraints:@"V:|[tabBar]|" forViews:views];
-            [self.view addVisualConstraints:@"V:|[divider]|" forViews:views];
+            [self.view addVisualConstraints:@"V:|-statusBarHeight-[tabBar]|" forViews:views withMetrics:metrics];
             [self.view addVisualConstraints:@"V:|[contentContainer]|" forViews:views];
-            [self.view addVisualConstraints:@"[divider][tabBar(==barHeight)]|" forViews:views withMetrics:metrics];
-            [self.view addVisualConstraints:@"|[contentContainer][divider]" forViews:views];
+            [self.view addVisualConstraints:@"|[contentContainer][tabBar(==barHeight)]|" forViews:views withMetrics:metrics];
             break;
     }
 
     [self reloadTabButtons];
 }
-
-#pragma mark - Drawing
 
 -(FTBOrientType)getOrient {
     FTBOrientType orient;
@@ -110,11 +102,22 @@ static const NSInteger TagOffset = 1000;
     return orient;
 }
 
+-(FTBStyleType)getStyle {
+    FTBStyleType style;
+    if (IS_IPAD) style = FTB_STYLE_IPAD;
+    else style = FTB_STYLE_IPHONE;
+    return style;
+}
+
 - (void)addTabButtons {
     
     NSMutableArray* tabs = [NSMutableArray array];
     
-    // Create the tabs
+    /*
+     * CREATE TAB
+     * for each view controller
+     */
+    
     [self.viewControllers enumerateObjectsUsingBlock:^(UIViewController* aView, NSUInteger idx, BOOL *stop) {
         // create the tab bar
         UIView* tab = [UIView new];
@@ -143,70 +146,92 @@ static const NSInteger TagOffset = 1000;
         [tabs addObject:tab];
     }];
     
-    // CONSTRAINTS
+    /*
+     * MAKE CONSTRAINTS
+     * based on layout
+     */
     
     for (int i = 0; i < tabs.count; i++) {
-        UIView *tab = [tabs objectAtIndex:i];
         
-        // different logic for each orientation
+        UIView *tab = [tabs objectAtIndex:i];
+        NSDictionary *single = NSDictionaryOfVariableBindings(tab);
         FTBOrientType orient = [self getOrient];
+        FTBStyleType style = [self getStyle];
+        
         switch (orient) {
+                
+            // VERTICAL
+            // | | | |
             case orientRight:
             case orientLeft:
-                if (i == 0) {
-                    // leftmost tab
-                    NSDictionary *oneView = NSDictionaryOfVariableBindings(tab);
-                    [tabBar addVisualConstraints:@"V:|[tab]" forViews:oneView];
-                    [tabBar addVisualConstraints:@"|[tab]|" forViews:oneView];
+            {
+                // TAB WIDTH = BAR WIDTH
+                if (orient == orientLeft) {
+                     [tabBar addVisualConstraints:@"|[tab]-pixel-|" forViews:single withMetrics:metrics];
                 } else {
+                    [tabBar addVisualConstraints:@"|-pixel-[tab]|" forViews:single withMetrics:metrics];
+                }
+                
+                // TAB SPACING STYLE
+                if (i == 0) { // TOP tab is glued to the top of the bar
+                    if (style == ftbStyleSpread) {
+                        [tabBar addVisualConstraints:@"V:|-pixel-[tab]" forViews:single withMetrics:metrics];
+                    } else {
+                        [tabBar addVisualConstraints:@"V:|-pixel-[tab(==tabWidth)]" forViews:single withMetrics:metrics];
+                    }
+                } else { // others come after and are the same size as the first
                     UIView *prevTab = [tabs objectAtIndex:(i - 1)];
                     NSDictionary *tabviews = NSDictionaryOfVariableBindings(tab, prevTab);
-                    if (i == tabs.count - 1) {
-                        // rightmost tab
-                        if (IS_RETINA) [tabBar addVisualConstraints:@"V:[prevTab]-pixel-[tab(==prevTab)]|" forViews:tabviews withMetrics:metrics];
-                        else [tabBar addVisualConstraints:@"V:[prevTab]-pixel-[tab(==prevTab)]|" forViews:tabviews withMetrics:metrics];
-                        
+                    if (style == ftbStyleSpread) {
+                        [tabBar addVisualConstraints:@"V:[prevTab]-pixel-[tab(==prevTab)]" forViews:tabviews withMetrics:metrics];
+                        if (i == tabs.count - 1) { // BOTTOM tab is attached to bottom if spread
+                            [tabBar addVisualConstraints:@"V:[tab]|" forViews:tabviews withMetrics:metrics];
+                        }
                     } else {
-                        // other tabs
-                        if (IS_RETINA) [tabBar addVisualConstraints:@"V:[prevTab]-pixel-[tab(==prevTab)]" forViews:tabviews withMetrics:metrics];
-                        else [tabBar addVisualConstraints:@"V:[prevTab]-pixel-[tab(==prevTab)]" forViews:tabviews withMetrics:metrics];
+                        [tabBar addVisualConstraints:@"V:[prevTab]-pixel-[tab(==tabWidth)]" forViews:tabviews withMetrics:metrics];
                     }
-                    [tabBar addVisualConstraints:@"|[tab]|" forViews:tabviews];
                 }
-                break;
                 
+                break;
+            }
+            
+            // HORIZONTAL
+            // - - - - -
             case orientTop:
             case  orientBottom:
-                if (i == 0) {
-                    // leftmost tab
-                    NSDictionary *oneView = NSDictionaryOfVariableBindings(tab);
-                    [tabBar addVisualConstraints:@"|[tab]" forViews:oneView];
-                    [tabBar addVisualConstraints:@"V:|[tab]|" forViews:oneView];
+            {
+                // TAB HEIGHT = BAR HEIGHT
+                if (orient == orientTop) {
+                    [tabBar addVisualConstraints:@"V:|[tab]-pixel-|" forViews:single withMetrics:metrics];
                 } else {
+                    [tabBar addVisualConstraints:@"V:|-pixel-[tab]|" forViews:single withMetrics:metrics];
+                }
+                
+                // TAB SPACING STYLE
+                if (i == 0) { // LEFT tab is glued to the left end of the bar
+                    if (style == ftbStyleSpread) {
+                        [tabBar addVisualConstraints:@"|[tab]" forViews:single];
+                    } else {
+                        [tabBar addVisualConstraints:@"|[tab(==tabWidth)]" forViews:single withMetrics:metrics];
+                    }
+                } else { // others come after and are the same size as the first
                     UIView *prevTab = [tabs objectAtIndex:(i - 1)];
                     NSDictionary *tabviews = NSDictionaryOfVariableBindings(tab, prevTab);
-                    if (i == tabs.count - 1) {
-                        // rightmost tab
-                        if (IS_RETINA) [tabBar addVisualConstraints:@"[prevTab]-pixel-[tab(==prevTab)]|" forViews:tabviews withMetrics:metrics];
-                        else [tabBar addVisualConstraints:@"[prevTab]-pixel-[tab(==prevTab)]|" forViews:tabviews withMetrics:metrics];
-                        
+                    if (style == ftbStyleSpread) {
+                        [tabBar addVisualConstraints:@"[prevTab]-pixel-[tab(==prevTab)]" forViews:tabviews withMetrics:metrics];
+                        if (i == tabs.count - 1) { // RIGHT tab is attached to end if spread
+                            [tabBar addVisualConstraints:@"[tab]|" forViews:tabviews withMetrics:metrics];
+                        }
                     } else {
-                        // other tabs
-                        if (IS_RETINA) [tabBar addVisualConstraints:@"[prevTab]-pixel-[tab(==prevTab)]" forViews:tabviews withMetrics:metrics];
-                        else [tabBar addVisualConstraints:@"[prevTab]-pixel-[tab(==prevTab)]" forViews:tabviews withMetrics:metrics];
+                        [tabBar addVisualConstraints:@"[prevTab]-pixel-[tab(==tabWidth)]" forViews:tabviews withMetrics:metrics];
                     }
-                    [tabBar addVisualConstraints:@"V:|[tab]|" forViews:tabviews];
                 }
                 break;
-                
+            }
         }
         
     }
     
-    /*
-        
-		[self deselectTabButton:button];
-     */
 }
 
 - (void)reloadTabButtons {
@@ -229,14 +254,13 @@ static const NSInteger TagOffset = 1000;
 - (void)selectTabButton:(UIView *)tab {
     
     [tab setBackgroundColor:TAB_SELECTED_BG];
-	//[button setTitleColor:TAB_SELECTED_FG forState:UIControlStateNormal];
+    [[tab.subviews objectAtIndex:0] setTextColor:TAB_SELECTED_FG];
 }
 
 - (void)deselectTabButton:(UIView *)tab {
     
     [tab setBackgroundColor:TAB_BG];
-	//[button setTitleColor:TAB_FG forState:UIControlStateNormal];
-    
+    [[tab.subviews objectAtIndex:0] setTextColor:TAB_FG];
 }
 
 
