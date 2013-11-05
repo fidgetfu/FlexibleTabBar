@@ -2,7 +2,7 @@
 
 forked from MHTabBarController by Matthijs Hollemans, now with 100% more autolayout
 
-This is a custom container view controller for iOS 6 and beyond that works just like a regular UITabBarController, except that there are a LOT more options. And! Best of all! You can put it anywhere!
+This is a custom container view controller for iOS 7 that works just like a regular UITabBarController, except that there are a LOT more options. And! Best of all! You can put it anywhere!
 
 There are two versions of FTB in this project, one with rect drawing and one with autolayout. I reccommend you use the autolayout one - it's shinier and has more features. But if you must have pixel specific control, the rect drawn one is still available.
 
